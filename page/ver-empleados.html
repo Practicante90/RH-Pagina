@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ver Empleados</title>
+  <link rel="stylesheet" href="../Styles/ver-empleados.css">
+</head>
+<body>
+  <!-- Botón regresar -->
+  <div class="back-button">
+    <a href="../page/empleados.html">&larr; Regresar</a>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="content">
+    <header>
+      <h1>Empleados Registrados</h1>
+    </header>
+
+    <section>
+        <div class="table-container">
+          <table class="empleados-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Clave</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Nombres</th>
+                <th>VISA</th>
+                <th>Puesto</th>
+                <th>Área</th>
+                <th>Fecha Ingreso</th>
+                <th>Escolaridad</th>
+                <th>Fecha Nacimiento</th>
+                <th>CURP</th>
+                <th>Email</th>
+                <th>Turno</th>
+                <th>Fecha Alta</th>
+                <th>Estatus</th>
+                <th>Tipo Nómina</th>
+                <th>Planta</th>
+              </tr>
+            </thead>
+            <tbody id="empleados-body">
+              <!-- Se llenará dinámicamente -->
+            </tbody>
+          </table>
+        </div>
+      </section>      
+  </div>
+
+  <!-- Script para cargar datos -->
+  <script src="../code/ver-empleados.js"></script>
+</body>
+</html>
