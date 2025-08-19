@@ -56,7 +56,7 @@ body {
     background-color: #f1f1f1;
 }
 
-/* Responsivo */
+/* Responsivo tabla */
 @media (max-width: 768px) {
     .empleados-table th, .empleados-table td {
         font-size: 12px;
@@ -92,6 +92,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    position: relative;
 }
 
 .modal-content h2 {
@@ -116,37 +117,38 @@ body {
 }
 
 /* Formulario dentro del modal */
-#formEditarEmpleado {
+#formEditarCapacitador {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px 20px;
+    grid-template-columns: 1fr; /* 👈 una sola columna */
+    gap: 15px; /* separación entre filas */
 }
 
-#formEditarEmpleado label {
+#formEditarCapacitador label {
     display: block;
     font-weight: bold;
     margin-bottom: 5px;
     font-size: 14px;
 }
 
-#formEditarEmpleado input {
+#formEditarCapacitador input,
+#formEditarCapacitador select,
+#formEditarCapacitador textarea {
     width: 100%;
     padding: 8px 10px;
     border-radius: 6px;
     border: 1px solid #ccc;
     font-size: 14px;
     box-sizing: border-box;
+    margin-bottom: 10px; /* separación entre campos */
 }
 
-/* Hacer que campos que necesiten todo el ancho ocupen las dos columnas */
-#formEditarEmpleado input[type="hidden"] { display: none; }
-#formEditarEmpleado input.full-width {
-    grid-column: 1 / -1;
+/* Ocultar campos hidden */
+#formEditarCapacitador input[type="hidden"] { 
+    display: none; 
 }
 
 /* Botón guardar cambios */
-#formEditarEmpleado button {
-    grid-column: 1 / -1;
+#formEditarCapacitador button {
     padding: 12px 20px;
     background-color: #3498db;
     color: white;
@@ -155,15 +157,10 @@ body {
     font-size: 16px;
     cursor: pointer;
     transition: background 0.3s;
+    margin-top: 10px;
 }
 
-#formEditarEmpleado button:hover {
+#formEditarCapacitador button:hover {
     background-color: #2176c7;
 }
-
-/* Responsive modal form */
-@media (max-width: 600px) {
-    #formEditarEmpleado {
-        grid-template-columns: 1fr;
-    }
-}
+    

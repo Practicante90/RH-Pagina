@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Capacitadores Registrados</title>
+  <link rel="stylesheet" href="../Styles/ver-capacitadores.css"> 
+</head>
+<body>
+  <!-- Botón regresar -->
+  <div class="back-button">
+    <a href="../page/capacitadores.html">&larr; Regresar</a>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="content">
+    <header>
+      <h1>Capacitadores Registrados</h1>
+    </header>
+
+    <section>
+      <div class="table-container">
+        <table class="empleados-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Clave</th>
+              <th>Nombres</th>
+              <th>Apellido Paterno</th>
+              <th>Fecha de Alta</th>
+              <th>Estatus</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="capacitadores-body">
+            <!-- Aquí se insertarán los datos -->
+          </tbody>
+        </table>
+      </div>
+    </section>      
+  </div>
+
+  <!-- Modal para editar capacitador -->
+  <div id="modalEditarCapacitador" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Editar Capacitador</h2>
+      <form id="formEditarCapacitador">
+        <input type="hidden" id="edit_id">
+        <input type="hidden" id="edit_empleado_id">
+
+        <div class="form-group">
+          <label for="empleado_input">Empleado:</label>
+          <input type="text" id="empleado_input" name="empleado_input" list="empleadosList" placeholder="Escribe para buscar..." required>
+          <datalist id="empleadosList">
+            <!-- Opciones se llenarán dinámicamente desde la API -->
+          </datalist>
+        </div>
+
+        <label>Fecha de Alta:</label>
+        <input type="date" id="edit_fecha_alta" required>
+
+        <label>Estatus:</label>
+        <input type="text" id="edit_estatus" required>
+
+        <button type="submit">Guardar Cambios</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script para cargar datos -->
+  <script src="../code/ver-capacitadores.js"></script>
+</body>
+</html>

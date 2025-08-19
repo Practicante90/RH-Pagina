@@ -1,0 +1,140 @@
+/* Reset y fondo base */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7f8;
+    padding: 20px;
+  }
+  
+  /* Botón regresar */
+  .back-button {
+    margin-bottom: 20px;
+  }
+  
+  .back-button a {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background-color: #3498db;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+  
+  .back-button a:hover {
+    background-color: #2176c7;
+  }
+  
+  /* Contenido principal */
+  .content header {
+    background-color: #3498db;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  /* Tabla de cursos */
+  .cursos-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .cursos-table th, .cursos-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .cursos-table th {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .cursos-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Responsivo */
+  @media (max-width: 768px) {
+    .cursos-table th, .cursos-table td {
+      font-size: 12px;
+      padding: 8px 10px;
+    }
+  
+    .back-button a {
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+  }
+  /* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+  }
+  
+  .modal-content h2 {
+    text-align: center;
+    color: #3498db;
+    margin-top: 0;
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  
+  .close:hover { color: #000; }
+  
+  /* Formulario modal */
+  #formEditarCurso {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  #formEditarCurso .form-group { display: flex; flex-direction: column; }
+  #formEditarCurso label { font-weight: bold; margin-bottom: 5px; }
+  #formEditarCurso input, #formEditarCurso textarea {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  
+  #formEditarCurso button {
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  #formEditarCurso button:hover { background-color: #2176c7; }
+  

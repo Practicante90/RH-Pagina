@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ver Empleados</title>
+  <title>Empleados Registrados</title>
   <link rel="stylesheet" href="../Styles/ver-empleados.css">
 </head>
 <body>
@@ -41,17 +41,81 @@
                 <th>Estatus</th>
                 <th>Tipo Nómina</th>
                 <th>Planta</th>
+                <th>Editar</th> <!-- Nueva columna para editar -->
               </tr>
             </thead>
             <tbody id="empleados-body">
-              <!-- Se llenará dinámicamente -->
             </tbody>
           </table>
         </div>
       </section>      
   </div>
 
-  <!-- Script para cargar datos -->
+  <!-- Modal para editar empleado -->
+  <div id="modalEditar" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Editar Empleado</h2>
+      <form id="formEditarEmpleado">
+        <input type="hidden" id="edit_id">
+
+        <label for="edit_clave">Clave</label>
+        <input type="number" id="edit_clave" required>
+
+        <label for="edit_apellido_paterno">Apellido Paterno</label>
+        <input type="text" id="edit_apellido_paterno" required>
+
+        <label for="edit_apellido_materno">Apellido Materno</label>
+        <input type="text" id="edit_apellido_materno">
+
+        <label for="edit_nombres">Nombres</label>
+        <input type="text" id="edit_nombres" required>
+
+        <label for="edit_VISA">VISA</label>
+        <input type="text" id="edit_VISA" maxlength="2" required>
+
+        <label for="edit_puesto">Puesto</label>
+        <input type="text" id="edit_puesto" required>
+
+        <label for="edit_area">Área</label>
+        <input type="text" id="edit_area" required>
+
+        <label for="edit_fecha_ingreso">Fecha Ingreso</label>
+        <input type="date" id="edit_fecha_ingreso" required>
+
+        <label for="edit_escolaridad">Escolaridad</label>
+        <input type="text" id="edit_escolaridad">
+
+        <label for="edit_fecha_nacimiento">Fecha Nacimiento</label>
+        <input type="date" id="edit_fecha_nacimiento" required>
+
+        <label for="edit_curp">CURP</label>
+        <input type="text" id="edit_curp" maxlength="18" required>
+
+        <label for="edit_email">Email</label>
+        <input type="email" id="edit_email">
+
+        <label for="edit_turno">Turno</label>
+        <input type="number" id="edit_turno">
+
+        <label for="edit_fecha_alta">Fecha Alta</label>
+        <input type="date" id="edit_fecha_alta" required>
+
+        <label for="edit_estatus">Estatus</label>
+        <input type="text" id="edit_estatus" required>
+
+        <label for="edit_tipo_nomina">Tipo Nómina</label>
+        <input type="text" id="edit_tipo_nomina" required>
+
+        <label for="edit_planta">Planta</label>
+        <input type="number" id="edit_planta" required>
+
+        <button type="submit">Guardar Cambios</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script para cargar datos y editar -->
   <script src="../code/ver-empleados.js"></script>
 </body>
 </html>

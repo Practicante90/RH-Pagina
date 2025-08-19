@@ -3,28 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página Principal</title>
+  <title>Control Profesional de Cursos</title>
   <link rel="stylesheet" href="../Styles/index.css">
 </head>
 <body>
-  <div class="sidebar">
-    <h2>Menú</h2>
-    <a href="../page/index.html">Inicio</a>
-    <a href="../page/empleados.html">Empleados</a>
-    <a href="#">Servicios</a>
-    <a href="#">Contacto</a>
-    <a href="#">Cerrar Sesión</a>
-  </div>
+
+    <div class="sidebar">
+        <h2>Menú</h2>
+        <a href="../page/index.html">Inicio</a>
+        <a href="../page/empleados.html">Empleados</a>
+        <a href="../page/cursos.html">Cursos</a>
+        <a href="../page/capacitadores.html">Capacitadores</a>
+        <a href="#">Reportes</a>
+        <a href="#">Cerrar Sesión</a>
+      </div>
 
   <div class="content">
     <header>
-      <h1>Página Principal</h1>
+      <h1>Control de Cursos</h1>
     </header>
 
-    <section>
-      <h2>Bienvenido</h2>
-      <p>Este es el contenido principal de la página. Aquí puedes agregar texto, imágenes, tablas o cualquier otro elemento HTML.</p>
+    <section class="welcome">
+      <h2>Bienvenido al Sistema</h2>
+      <p>Administra empleados y cursos de manera eficiente. Aquí puedes ver las estadísticas principales y acceder rápidamente a las secciones más importantes.</p>
+    </section>
+
+    <div class="stat">
+        <span class="number" id="empleados-count">0</span>
+        <span class="label">Empleados Registrados</span>
+      </div>      
+      <div class="stat">
+        <span class="number">35</span>
+        <span class="label">Cursos Activos</span>
+      </div>
+      <div class="stat">
+        <span class="number">7</span>
+        <span class="label">Capacitadores</span>
+      </div>
+      <div class="stat">
+        <span class="number">24</span>
+        <span class="label">Cursos Pendientes</span>
+      </div>
+    </section>
+
+    <section class="actions">
+      <a class="btn" href="../page/empleados.html">Ver Empleados</a>
+      <a class="btn" href="#">Ver Cursos</a>
+      <a class="btn" href="#">Generar Reporte</a>
+      <a class="btn" href="#">Configuración</a>
     </section>
   </div>
+  <script src="../code/index.js"></script>
 </body>
 </html>
