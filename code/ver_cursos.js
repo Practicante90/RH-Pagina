@@ -2,6 +2,29 @@ const tablaCursos = document.getElementById('tablaCursos');
 const modal = document.getElementById('modalEditar');
 const closeModal = document.querySelector('.close');
 const formEditar = document.getElementById('formEditarCurso');
+const notification = document.getElementById('notification');
+const notificationMessage = document.getElementById('notification-message');
+const notificationClose = document.getElementById('notification-close');
+
+function showNotification(message, type = 'success') {
+    notificationMessage.textContent = message;
+    notification.className = `notification ${type}`;
+    notification.style.display = 'block';
+
+    setTimeout(() => {
+        hideNotification();
+    }, 5000);
+}
+
+function hideNotification() {
+    notification.style.animation = 'slideOut 0.3s ease-out';
+    setTimeout(() => {
+        notification.style.display = 'none';
+        notification.style.animation = '';
+    }, 300);
+}
+
+notificationClose.addEventListener('click', hideNotification);
 
 async function cargarCursos() {
   try {
@@ -24,6 +47,7 @@ async function cargarCursos() {
   } catch (error) {
     console.error(error);
     tablaCursos.innerHTML = `<tr><td colspan="4">Error al cargar los cursos</td></tr>`;
+    showNotification('Error al cargar la lista de cursos', 'error');
   }
 }
 
@@ -51,16 +75,16 @@ formEditar.addEventListener('submit', async (e) => {
     });
 
     if(response.ok){
-      alert('Curso actualizado correctamente');
+      showNotification('Curso actualizado correctamente');
       modal.style.display = 'none';
       cargarCursos();
     } else {
-      alert('Error al actualizar curso');
+      showNotification('Error al actualizar curso', 'error');
     }
 
   } catch (error) {
     console.error(error);
-    alert('Error de conexión');
+    showNotification('Error de conexión', 'error');
   }
 });
 

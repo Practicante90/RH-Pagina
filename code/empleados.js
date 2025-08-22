@@ -1,4 +1,27 @@
     const form = document.querySelector('.form-empleado');
+    const notification = document.getElementById('notification');
+    const notificationMessage = document.getElementById('notification-message');
+    const notificationClose = document.getElementById('notification-close');
+
+    function showNotification(message, type = 'success') {
+        notificationMessage.textContent = message;
+        notification.className = `notification ${type}`;
+        notification.style.display = 'block';
+
+        setTimeout(() => {
+            hideNotification();
+        }, 5000);
+    }
+
+    function hideNotification() {
+        notification.style.animation = 'slideOut 0.3s ease-out';
+        setTimeout(() => {
+            notification.style.display = 'none';
+            notification.style.animation = '';
+        }, 300);
+    }
+
+    notificationClose.addEventListener('click', hideNotification);
 
     form.addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -12,7 +35,7 @@
     for (let field of requiredFields) {
         const value = document.getElementById(field).value.trim();
         if (!value) {
-        alert(`Por favor, complete el campo "${field.replace('_', ' ')}".`);
+        showNotification(`Por favor, complete el campo "${field.replace('_', ' ')}".`, 'error');
         return;
         }
     }
@@ -20,7 +43,7 @@
     const email = document.getElementById('email').value.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        alert('Por favor, ingrese un correo electrónico válido.');
+        showNotification('Por favor, ingrese un correo electrónico válido.', 'error');
         return;
     }
 
@@ -52,15 +75,15 @@
         });
 
         if (response.ok) {
-            alert('Empleado registrado correctamente!');
+            showNotification('Empleado registrado correctamente!');
             form.reset();
         } else {
-            const errorText = await response.text(); // captura mensaje del backend
+            const errorText = await response.text(); 
             console.error('Error del servidor:', errorText);
-            alert('Error al registrar empleado: ' + errorText);
+            showNotification('Error al registrar empleado: ' + errorText, 'error');
         }
         } catch (error) {
         console.error(error);
-        alert('Error de conexión con la API');
+        showNotification('Error de conexión con la API', 'error');
     }
     });

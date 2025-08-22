@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programación de Cursos</title>
+  <link rel="stylesheet" href="../Styles/programacion-cursos.css">
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>Menú</h2>
+    <a href="../page/index.html">Inicio</a>
+    <a href="../page/empleados.html">Empleados</a>
+    <a href="../page/cursos.html">Cursos</a>
+    <a href="../page/capacitadores.html">Capacitadores</a>
+    <a href="../page/programacion-cursos.html">Programación</a>
+    <a href="#">Cerrar Sesión</a>
+  </div>
+
+  <div class="content">
+    <header>
+      <h1>Programación de Cursos</h1>
+    </header>
+
+    <!-- Notificación de confirmación -->
+    <div id="notification" class="notification">
+      <span id="notification-message"></span>
+      <button id="notification-close">&times;</button>
+    </div>
+
+    <section>
+      <form class="form-programacion" id="formProgramacion">
+        <div class="form-group">
+          <label for="capacitador_id">Capacitador:</label>
+          <input type="text" id="capacitador_input" name="capacitador_input" list="capacitadoresList" placeholder="Escribe para buscar..." required>
+          <datalist id="capacitadoresList">
+            <!-- Opciones se llenarán dinámicamente desde la API -->
+          </datalist>
+          <input type="hidden" id="capacitador_id" name="capacitador_id">
+        </div>
+
+        <div class="form-group">
+          <label for="curso_id">Curso:</label>
+          <input type="text" id="curso_input" name="curso_input" list="cursosList" placeholder="Escribe para buscar..." required>
+          <datalist id="cursosList">
+            <!-- Opciones se llenarán dinámicamente desde la API -->
+          </datalist>
+          <input type="hidden" id="curso_id" name="curso_id">
+        </div>
+
+        <div class="form-group">
+          <label for="fecha_inicio">Fecha de Inicio:</label>
+          <input type="date" id="fecha_inicio" name="fecha_inicio" required>
+        </div>
+
+        <div class="form-group">
+          <label for="duracion_horas">Duración (horas):</label>
+          <input type="number" id="duracion_horas" name="duracion_horas" min="1" required>
+        </div>
+
+        <div class="form-group">
+          <label for="status">Estatus:</label>
+          <select id="status" name="status" required>
+            <option value="pendiente">Pendiente</option>
+            <option value="en_proceso">En Proceso</option>
+            <option value="completado">Completado</option>
+            <option value="cancelado">Cancelado</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-submit">Guardar Programación</button>
+        <a href="../page/ver-programacion-cursos.html" class="btn-view">Ver Programación</a>
+      </form>
+    </section>
+  </div>
+
+  <script src="../code/programacion-cursos.js"></script>
+</body>
+</html>

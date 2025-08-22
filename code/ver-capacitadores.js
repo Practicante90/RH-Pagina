@@ -5,6 +5,29 @@ const formEditar = document.getElementById('formEditarCapacitador');
 const inputEmpleado = document.getElementById('empleado_input');
 const hiddenEmpleadoId = document.getElementById('edit_empleado_id');
 const datalistEmpleados = document.getElementById('empleadosList');
+const notification = document.getElementById('notification');
+const notificationMessage = document.getElementById('notification-message');
+const notificationClose = document.getElementById('notification-close');
+
+function showNotification(message, type = 'success') {
+    notificationMessage.textContent = message;
+    notification.className = `notification ${type}`;
+    notification.style.display = 'block';
+    
+    setTimeout(() => {
+        hideNotification();
+    }, 5000);
+}
+
+function hideNotification() {
+    notification.style.animation = 'slideOut 0.3s ease-out';
+    setTimeout(() => {
+        notification.style.display = 'none';
+        notification.style.animation = '';
+    }, 300);
+}
+
+notificationClose.addEventListener('click', hideNotification);
 
 let empleadosGlobal = []; 
 
@@ -47,6 +70,7 @@ async function cargarCapacitadores() {
 
   } catch (error) {
     console.error('Error al cargar capacitadores:', error);
+    showNotification('Error al cargar la lista de capacitadores', 'error');
   }
 }
 
@@ -71,6 +95,7 @@ async function cargarEmpleadosDatalist(selectedId = null) {
 
   } catch (error) {
     console.error('Error al cargar empleados:', error);
+    showNotification('Error al cargar la lista de empleados', 'error');
   }
 }
 
@@ -88,6 +113,7 @@ async function abrirModal(id) {
     modal.style.display = 'block';
   } catch (error) {
     console.error('Error al obtener capacitador:', error);
+    showNotification('Error al cargar datos del capacitador', 'error');
   }
 }
 
@@ -108,7 +134,7 @@ formEditar.addEventListener('submit', async (e) => {
   const id = document.getElementById('edit_id').value;
   const empleado_id = parseInt(hiddenEmpleadoId.value);
   if (!empleado_id) {
-    alert('Selecciona un empleado válido de la lista.');
+    showNotification('Selecciona un empleado válido de la lista.', 'error');
     return;
   }
 
@@ -126,18 +152,17 @@ formEditar.addEventListener('submit', async (e) => {
     });
 
     if (response.ok) {
-      alert('Capacitador actualizado correctamente');
+      showNotification('Capacitador actualizado correctamente');
       modal.style.display = 'none';
       cargarCapacitadores();
     } else {
       const errorText = await response.text();
-      alert('Error al actualizar capacitador: ' + errorText);
+      showNotification('Error al actualizar capacitador: ' + errorText, 'error');
     }
   } catch (error) {
     console.error(error);
-    alert('Error de conexión con la API');
+    showNotification('Error de conexión con la API', 'error');
   }
 });
 
-// Inicializar
 window.addEventListener('DOMContentLoaded', cargarCapacitadores);

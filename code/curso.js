@@ -1,5 +1,28 @@
 const formCurso = document.getElementById('formCurso');
 const mensajeCurso = document.getElementById('mensajeCurso');
+const notification = document.getElementById('notification');
+const notificationMessage = document.getElementById('notification-message');
+const notificationClose = document.getElementById('notification-close');
+
+function showNotification(message, type = 'success') {
+    notificationMessage.textContent = message;
+    notification.className = `notification ${type}`;
+    notification.style.display = 'block';
+
+    setTimeout(() => {
+        hideNotification();
+    }, 5000);
+}
+
+function hideNotification() {
+    notification.style.animation = 'slideOut 0.3s ease-out';
+    setTimeout(() => {
+        notification.style.display = 'none';
+        notification.style.animation = '';
+    }, 300);
+}
+
+notificationClose.addEventListener('click', hideNotification);
 
 formCurso.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -8,7 +31,7 @@ formCurso.addEventListener('submit', async (e) => {
   const descripcion = document.getElementById('descripcion').value.trim();
 
   if (!nombre || !descripcion) {
-    mostrarMensaje('Todos los campos son obligatorios.', 'error');
+    showNotification('Todos los campos son obligatorios.', 'error');
     return;
   }
 
@@ -20,23 +43,13 @@ formCurso.addEventListener('submit', async (e) => {
     });
 
     if (response.ok) {
-      mostrarMensaje('Curso guardado correctamente', 'exito');
+      showNotification('Curso guardado correctamente', 'success');
       formCurso.reset();
     } else {
-      mostrarMensaje('Error al guardar el curso', 'error');
+      showNotification('Error al guardar el curso', 'error');
     }
   } catch (error) {
     console.error(error);
-    mostrarMensaje('Error en la conexión con la API', 'error');
+    showNotification('Error en la conexión con la API', 'error');
   }
 });
-
-function mostrarMensaje(texto, tipo) {
-  mensajeCurso.textContent = texto;
-  mensajeCurso.className = `mensaje ${tipo}`;
-  mensajeCurso.style.display = 'block';
-
-  setTimeout(() => {
-    mensajeCurso.style.display = 'none';
-  }, 4000);
-}

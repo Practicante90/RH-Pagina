@@ -3,6 +3,35 @@ const modal = document.getElementById('modalEditar');
 const spanClose = document.querySelector('.close');
 const formEditar = document.getElementById('formEditarEmpleado');
 
+// Elementos de notificación
+const notification = document.getElementById('notification');
+const notificationMessage = document.getElementById('notification-message');
+const notificationClose = document.getElementById('notification-close');
+
+// Función para mostrar notificaciones
+function showNotification(message, type = 'success') {
+    notificationMessage.textContent = message;
+    notification.className = `notification ${type}`;
+    notification.style.display = 'block';
+    
+    // Auto-ocultar después de 5 segundos
+    setTimeout(() => {
+        hideNotification();
+    }, 5000);
+}
+
+// Función para ocultar notificaciones
+function hideNotification() {
+    notification.style.animation = 'slideOut 0.3s ease-out';
+    setTimeout(() => {
+        notification.style.display = 'none';
+        notification.style.animation = '';
+    }, 300);
+}
+
+// Event listener para cerrar notificación
+notificationClose.addEventListener('click', hideNotification);
+
 function formatDateForInput(dateString) {
   if (!dateString) return "";
 
@@ -67,6 +96,7 @@ async function cargarEmpleados() {
   } catch (error) {
     console.error(error);
     tbody.innerHTML = `<tr><td colspan="19">Error al cargar empleados</td></tr>`;
+    showNotification('Error al cargar la lista de empleados', 'error');
   }
 }
 
@@ -97,6 +127,7 @@ async function abrirModal(id) {
     modal.style.display = 'block';
   } catch (error) {
     console.error('Error al obtener empleado:', error);
+    showNotification('Error al cargar datos del empleado', 'error');
   }
 }
 
@@ -135,16 +166,16 @@ formEditar.addEventListener('submit', async (e) => {
     });
 
     if (response.ok) {
-      alert('Empleado actualizado correctamente');
+      showNotification('Empleado actualizado correctamente');
       modal.style.display = 'none';
       cargarEmpleados();
     } else {
       const errorText = await response.text();
-      alert('Error al actualizar empleado: ' + errorText);
+      showNotification('Error al actualizar empleado: ' + errorText, 'error');
     }
   } catch (error) {
     console.error(error);
-    alert('Error de conexión con la API');
+    showNotification('Error de conexión con la API', 'error');
   }
 });
 

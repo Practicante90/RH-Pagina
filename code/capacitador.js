@@ -2,8 +2,30 @@ const formCapacitador = document.getElementById('formCapacitador');
 const mensajeCapacitador = document.getElementById('mensajeCapacitador');
 const empleadosList = document.getElementById('empleadosList');
 const empleadoInput = document.getElementById('empleado_id');
+const notification = document.getElementById('notification');
+const notificationMessage = document.getElementById('notification-message');
+const notificationClose = document.getElementById('notification-close');
 
-// Cargar empleados desde la API y llenar datalist
+function showNotification(message, type = 'success') {
+    notificationMessage.textContent = message;
+    notification.className = `notification ${type}`;
+    notification.style.display = 'block';
+
+    setTimeout(() => {
+        hideNotification();
+    }, 5000);
+}
+
+function hideNotification() {
+    notification.style.animation = 'slideOut 0.3s ease-out';
+    setTimeout(() => {
+        notification.style.display = 'none';
+        notification.style.animation = '';
+    }, 300);
+}
+
+notificationClose.addEventListener('click', hideNotification);
+
 async function cargarEmpleados() {
   try {
     const response = await fetch('http://192.168.0.115:3001/api/empleados');
@@ -16,24 +38,21 @@ async function cargarEmpleados() {
     });
   } catch (error) {
     console.error('Error al cargar empleados:', error);
+    showNotification('Error al cargar la lista de empleados', 'error');
   }
 }
 
-// Llamamos al cargar la página
 cargarEmpleados();
 
 formCapacitador.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  // Solo tomamos el ID del empleado (antes del guion)
   const empleado_id = empleadoInput.value.split(' - ')[0].trim();
   const fecha_alta = document.getElementById('fecha_alta').value.trim();
   const estatus = document.getElementById('estatus').value.trim();
 
   if (!empleado_id || !estatus) {
-    mensajeCapacitador.textContent = 'Todos los campos son obligatorios.';
-    mensajeCapacitador.className = 'mensaje error';
-    mensajeCapacitador.style.display = 'block';
+    showNotification('Todos los campos son obligatorios.', 'error');
     return;
   }
 
@@ -45,19 +64,13 @@ formCapacitador.addEventListener('submit', async (e) => {
     });
 
     if (response.ok) {
-      mensajeCapacitador.textContent = 'Capacitador guardado correctamente.';
-      mensajeCapacitador.className = 'mensaje exito';
-      mensajeCapacitador.style.display = 'block';
+      showNotification('Capacitador guardado correctamente.', 'success');
       formCapacitador.reset();
     } else {
-      mensajeCapacitador.textContent = 'Error al guardar el capacitador.';
-      mensajeCapacitador.className = 'mensaje error';
-      mensajeCapacitador.style.display = 'block';
+      showNotification('Error al guardar el capacitador.', 'error');
     }
   } catch (error) {
     console.error(error);
-    mensajeCapacitador.textContent = 'Error en la conexión con la API.';
-    mensajeCapacitador.className = 'mensaje error';
-    mensajeCapacitador.style.display = 'block';
+    showNotification('Error en la conexión con la API.', 'error');
   }
 });

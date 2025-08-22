@@ -8,21 +8,27 @@
 </head>
 <body>
   <!-- Menú lateral -->
-  <div class="sidebar">
-    <h2>Menú</h2>
-    <a href="../page/index.html">Inicio</a>
-    <a href="../page/empleados.html">Empleados</a>
-    <a href="../page/cursos.html">Cursos</a>
-    <a href="../page/capacitadores.html">Capacitadores</a>
-    <a href="#">Reportes</a>
-    <a href="#">Cerrar Sesión</a>
-  </div>
+      <div class="sidebar">
+        <h2>Menú</h2>
+        <a href="../page/index.html">Inicio</a>
+        <a href="../page/empleados.html">Empleados</a>
+        <a href="../page/cursos.html">Cursos</a>
+        <a href="../page/capacitadores.html">Capacitadores</a>
+        <a href="../page/programacion-cursos.html">Programación</a>
+        <a href="#">Cerrar Sesión</a>
+      </div>
 
   <!-- Contenido principal -->
   <div class="content">
     <header>
       <h1>Registro de Empleados</h1>
     </header>
+
+    <!-- Notificación de confirmación -->
+    <div id="notification" class="notification">
+      <span id="notification-message"></span>
+      <button id="notification-close">&times;</button>
+    </div>
 
     <section>
       <form action="#" method="POST" class="form-empleado">
@@ -119,7 +125,6 @@
     </section>
   </div>
 
-  <!-- Conectar script de JS separado -->
   <script src="../code/empleados.js"></script>
 </body>
 </html>

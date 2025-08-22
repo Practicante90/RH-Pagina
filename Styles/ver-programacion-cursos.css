@@ -20,7 +20,7 @@ body {
 }
 
 .back-button a:hover {
-    background-color: #1a4bbc;
+    background-color: #2176c7;
 }
 
 .content header {
@@ -31,7 +31,7 @@ body {
     margin-bottom: 20px;
 }
 
-.empleados-table {
+.programacion-table {
     width: 100%;
     border-collapse: collapse;
     background: white;
@@ -39,23 +39,23 @@ body {
     overflow: hidden;
 }
 
-.empleados-table th, .empleados-table td {
+.programacion-table th, .programacion-table td {
     padding: 12px 15px;
     border-bottom: 1px solid #ddd;
     text-align: left;
 }
 
-.empleados-table th {
+.programacion-table th {
     background-color: #1a4bbc;
     color: white;
 }
 
-.empleados-table tr:hover {
+.programacion-table tr:hover {
     background-color: #f1f1f1;
 }
 
 @media (max-width: 768px) {
-    .empleados-table th, .empleados-table td {
+    .programacion-table th, .programacion-table td {
         font-size: 12px;
         padding: 8px 10px;
     }
@@ -66,6 +66,7 @@ body {
     }
 }
 
+/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -112,36 +113,38 @@ body {
     color: #000;
 }
 
-#formEditarCapacitador {
+#formEditarProgramacion {
     display: grid;
     grid-template-columns: 1fr; 
     gap: 15px; 
 }
 
-#formEditarCapacitador label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
+#formEditarProgramacion .form-group { 
+    display: flex; 
+    flex-direction: column; 
+}
+
+#formEditarProgramacion label { 
+    font-weight: bold; 
+    margin-bottom: 5px; 
     font-size: 14px;
 }
 
-#formEditarCapacitador input,
-#formEditarCapacitador select,
-#formEditarCapacitador textarea {
+#formEditarProgramacion input,
+#formEditarProgramacion select {
     width: 100%;
     padding: 8px 10px;
     border-radius: 6px;
     border: 1px solid #ccc;
     font-size: 14px;
     box-sizing: border-box;
-    margin-bottom: 10px; 
 }
 
-#formEditarCapacitador input[type="hidden"] { 
+#formEditarProgramacion input[type="hidden"] { 
     display: none; 
 }
 
-#formEditarCapacitador button {
+#formEditarProgramacion button {
     padding: 12px 20px;
     background-color: #1a4bbc;
     color: white;
@@ -153,8 +156,8 @@ body {
     margin-top: 10px;
 }
 
-#formEditarCapacitador button:hover {
-    background-color: #1a4bbc;
+#formEditarProgramacion button:hover { 
+    background-color: #0056b3; 
 }
 
 /* Estilos para notificaciones */
