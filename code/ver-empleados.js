@@ -2,25 +2,20 @@ const tbody = document.getElementById('empleados-body');
 const modal = document.getElementById('modalEditar');
 const spanClose = document.querySelector('.close');
 const formEditar = document.getElementById('formEditarEmpleado');
-
-// Elementos de notificación
 const notification = document.getElementById('notification');
 const notificationMessage = document.getElementById('notification-message');
 const notificationClose = document.getElementById('notification-close');
 
-// Función para mostrar notificaciones
 function showNotification(message, type = 'success') {
     notificationMessage.textContent = message;
     notification.className = `notification ${type}`;
     notification.style.display = 'block';
-    
-    // Auto-ocultar después de 5 segundos
+  
     setTimeout(() => {
         hideNotification();
     }, 5000);
 }
 
-// Función para ocultar notificaciones
 function hideNotification() {
     notification.style.animation = 'slideOut 0.3s ease-out';
     setTimeout(() => {
@@ -29,7 +24,6 @@ function hideNotification() {
     }, 300);
 }
 
-// Event listener para cerrar notificación
 notificationClose.addEventListener('click', hideNotification);
 
 function formatDateForInput(dateString) {
@@ -44,7 +38,6 @@ function formatDateForInput(dateString) {
     const [day, month, year] = dateString.split("/");
     return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
   }
-
 
   return dateString;
 }
@@ -85,7 +78,6 @@ async function cargarEmpleados() {
       tbody.appendChild(tr);
     });
 
-    // Listener botones editar
     document.querySelectorAll('.btn-edit').forEach(btn => {
       btn.addEventListener('click', async () => {
         const id = btn.dataset.id;
@@ -118,16 +110,16 @@ async function abrirModal(id) {
     document.getElementById('edit_fecha_nacimiento').value = formatDateForInput(emp.fecha_nacimiento);
     document.getElementById('edit_curp').value = emp.curp;
     document.getElementById('edit_email').value = emp.email || '';
-    document.getElementById('edit_turno').value = emp.turno || '';
+    document.getElementById('edit_turno').value = emp.turno || '';      
     document.getElementById('edit_fecha_alta').value = formatDateForInput(emp.fecha_alta);
     document.getElementById('edit_estatus').value = emp.estatus;
     document.getElementById('edit_tipo_nomina').value = emp.tipo_nomina;
     document.getElementById('edit_planta').value = emp.planta;
 
     modal.style.display = 'block';
-  } catch (error) {
+  } catch (error) { 
     console.error('Error al obtener empleado:', error);
-    showNotification('Error al cargar datos del empleado', 'error');
+    showNotification('Error al cargar datos del empleado', 'error');  
   }
 }
 
@@ -180,3 +172,47 @@ formEditar.addEventListener('submit', async (e) => {
 });
 
 window.addEventListener('DOMContentLoaded', cargarEmpleados);
+
+document.getElementById('btnExportExcel').addEventListener('click', () => {
+    const table = document.querySelector('.empleados-table');
+    const wb = XLSX.utils.book_new();
+
+    const cloneTable = table.cloneNode(true);
+    cloneTable.querySelectorAll('tr').forEach(tr => {
+        tr.removeChild(tr.lastElementChild);
+    });
+
+    const ws = XLSX.utils.table_to_sheet(cloneTable);
+    XLSX.utils.book_append_sheet(wb, ws, 'Empleados');
+    XLSX.writeFile(wb, 'Empleados.xlsx');
+    showNotification('Archivo Excel exportado correctamente');
+});
+
+document.getElementById('btnExportPDF').addEventListener('click', () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.text('Lista de Empleados', 14, 15);
+
+    const table = document.createElement('table');
+    table.innerHTML = document.querySelector('.empleados-table').innerHTML;
+
+    table.querySelectorAll('tr').forEach(tr => {
+        tr.removeChild(tr.lastElementChild); 
+    });
+
+    Array.from(table.querySelectorAll('tbody tr')).forEach(tr => {
+        if (tr.style.display === 'none') tr.remove();
+    });
+
+    doc.autoTable({
+        startY: 25,
+        html: table,
+        theme: 'striped',
+        headStyles: { fillColor: [26, 75, 188] },
+        styles: { fontSize: 8 }
+    });
+
+    doc.save('Empleados.pdf');
+    showNotification('Archivo PDF exportado correctamente');
+});

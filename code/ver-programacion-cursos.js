@@ -14,11 +14,11 @@ function showNotification(message, type = 'success') {
     setTimeout(() => {
         hideNotification();
     }, 5000);
-}
+}   
 
 function hideNotification() {
     notification.style.animation = 'slideOut 0.3s ease-out';
-    setTimeout(() => {
+    setTimeout(() => {0
         notification.style.display = 'none';
         notification.style.animation = '';
     }, 300);
@@ -46,6 +46,8 @@ async function cargarProgramacion() {
     try {
         const response = await fetch('http://192.168.0.115:3001/api/programacionCursos');
         const data = await response.json();
+
+        tbody.innerHTML = '';
 
         data.forEach(prog => {
             const tr = document.createElement('tr');
@@ -76,7 +78,7 @@ async function cargarCapacitadoresDatalist(selectedId = null) {
         const response = await fetch('http://192.168.0.115:3001/api/capacitadores');
         const capacitadores = await response.json();
         capacitadoresGlobal = capacitadores;
-
+      
         const datalist = document.getElementById('editCapacitadoresList');
         datalist.innerHTML = '';
         capacitadores.forEach(cap => {
@@ -219,3 +221,47 @@ formEditar.addEventListener('submit', async (e) => {
 });
 
 window.addEventListener('DOMContentLoaded', cargarProgramacion);
+
+document.getElementById('btnExportExcel').addEventListener('click', () => {
+    const table = document.querySelector('.programacion-table');
+    const wb = XLSX.utils.book_new();
+
+    const cloneTable = table.cloneNode(true);
+    cloneTable.querySelectorAll('tr').forEach(tr => {
+        tr.removeChild(tr.lastElementChild);
+    });
+
+    const ws = XLSX.utils.table_to_sheet(cloneTable);
+    XLSX.utils.book_append_sheet(wb, ws, 'ProgramacionCursos');
+    XLSX.writeFile(wb, 'ProgramacionCursos.xlsx');
+    showNotification('Archivo Excel exportado correctamente');
+});
+
+document.getElementById('btnExportPDF').addEventListener('click', () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.text('Programación de Cursos', 14, 15);
+
+    const table = document.createElement('table');
+    table.innerHTML = document.querySelector('.programacion-table').innerHTML;
+
+    table.querySelectorAll('tr').forEach(tr => {
+        tr.removeChild(tr.lastElementChild); 
+    });
+
+    Array.from(table.querySelectorAll('tbody tr')).forEach(tr => {
+        if (tr.style.display === 'none') tr.remove();
+    });
+
+    doc.autoTable({
+        startY: 25,
+        html: table,
+        theme: 'striped',
+        headStyles: { fillColor: [26, 75, 188] },
+        styles: { fontSize: 8 }
+    });
+
+    doc.save('ProgramacionCursos.pdf');
+    showNotification('Archivo PDF exportado correctamente');
+});

@@ -38,7 +38,6 @@ async function cargarCapacitadores() {
         const capacitadores = await response.json();
         capacitadoresGlobal = capacitadores;
 
-        capacitadoresList.innerHTML = '';
         capacitadores.forEach(cap => {
             const option = document.createElement('option');
             option.value = `${cap.clave} - ${cap.nombres} ${cap.apellido_paterno}`;
@@ -50,14 +49,13 @@ async function cargarCapacitadores() {
         showNotification('Error al cargar la lista de capacitadores', 'error');
     }
 }
-
+        
 async function cargarCursos() {
     try {
         const response = await fetch('http://192.168.0.115:3001/api/cursos');
         const cursos = await response.json();
         cursosGlobal = cursos;
 
-        cursosList.innerHTML = '';
         cursos.forEach(curso => {
             const option = document.createElement('option');
             option.value = curso.nombre;
@@ -89,7 +87,7 @@ formProgramacion.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const capacitador_id = parseInt(hiddenCapacitadorId.value);
-    const curso_id = parseInt(hiddenCursoId.value);
+    const curso_id = parseInt(hiddenCursoId.value); 
     const fecha_inicio = document.getElementById('fecha_inicio').value;
     const duracion_horas = parseInt(document.getElementById('duracion_horas').value);
     const status = document.getElementById('status').value;
@@ -115,7 +113,7 @@ formProgramacion.addEventListener('submit', async (e) => {
     }
 
     try {
-        const response = await fetch('http://192.168.0.115:3001/api/programacion-cursos', {
+        const response = await fetch('http://192.168.0.115:3001/api/programacionCursos', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -142,7 +140,6 @@ formProgramacion.addEventListener('submit', async (e) => {
     }
 });
 
-// Cargar datos al iniciar la página
 window.addEventListener('DOMContentLoaded', () => {
     cargarCapacitadores();
     cargarCursos();

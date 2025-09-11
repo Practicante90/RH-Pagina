@@ -89,3 +89,48 @@ formEditar.addEventListener('submit', async (e) => {
 });
 
 cargarCursos();
+
+// Funciones de exportación
+document.getElementById('btnExportExcel').addEventListener('click', () => {
+    const table = document.querySelector('.cursos-table');
+    const wb = XLSX.utils.book_new();
+
+    const cloneTable = table.cloneNode(true);
+    cloneTable.querySelectorAll('tr').forEach(tr => {
+        tr.removeChild(tr.lastElementChild);
+    });
+
+    const ws = XLSX.utils.table_to_sheet(cloneTable);
+    XLSX.utils.book_append_sheet(wb, ws, 'Cursos');
+    XLSX.writeFile(wb, 'Cursos.xlsx');
+    showNotification('Archivo Excel exportado correctamente');
+});
+
+document.getElementById('btnExportPDF').addEventListener('click', () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    doc.text('Lista de Cursos', 14, 15);
+
+    const table = document.createElement('table');
+    table.innerHTML = document.querySelector('.cursos-table').innerHTML;
+
+    table.querySelectorAll('tr').forEach(tr => {
+        tr.removeChild(tr.lastElementChild); 
+    });
+
+    Array.from(table.querySelectorAll('tbody tr')).forEach(tr => {
+        if (tr.style.display === 'none') tr.remove();
+    });
+
+    doc.autoTable({
+        startY: 25,
+        html: table,
+        theme: 'striped',
+        headStyles: { fillColor: [26, 75, 188] },
+        styles: { fontSize: 8 }
+    });
+
+    doc.save('Cursos.pdf');
+    showNotification('Archivo PDF exportado correctamente');
+});

@@ -17,12 +17,20 @@
       <h1>Listado de Cursos</h1>
     </header>
 
-    <!-- Notificación de confirmación -->
     <div id="notification" class="notification">
       <span id="notification-message"></span>
       <button id="notification-close">&times;</button>
     </div>
 
+    <div class="download-buttons">
+      <button id="btnExportExcel" class="btn-download btn-excel">
+        <i>📊</i> Exportar a Excel
+      </button>
+      <button id="btnExportPDF" class="btn-download btn-pdf">
+        <i>📄</i> Exportar a PDF
+      </button>
+    </div>
+    
     <table class="cursos-table">
       <thead>
         <tr>
@@ -33,12 +41,10 @@
         </tr>
       </thead>
       <tbody id="tablaCursos">
-        <!-- Aquí se llenarán los cursos mediante JS -->
       </tbody>
     </table>
   </div>
 
-  <!-- Modal para editar curso -->
   <div id="modalEditar" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
@@ -61,6 +67,11 @@
     </div>
   </div>
 
+  <!-- Librerías para exportación -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+  
   <script src="../code/ver_cursos.js"></script>
 </body>
 </html>

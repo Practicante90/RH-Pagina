@@ -7,26 +7,30 @@
   <link rel="stylesheet" href="../Styles/ver-empleados.css">
 </head>
 <body>
-  <!-- Botón regresar -->
+
   <div class="back-button">
-    <a href="../page/empleados.html">&larr; Regresar</a>
+    <a href="empleados.html">&larr; Regresar</a>
   </div>
 
-  <!-- Contenido principal -->
   <div class="content">
     <header>
       <h1>Empleados Registrados</h1>
     </header>
 
-    <!-- Notificación de confirmación -->
     <div id="notification" class="notification">
       <span id="notification-message"></span>
       <button id="notification-close">&times;</button>
     </div>
 
     <section>
-        <div class="table-container">
-          <table class="empleados-table">
+      <div class="download-buttons">
+        <button id="btnExportExcel" class="btn-download btn-excel">
+          <i>📊</i> Exportar a Excel
+        </button>
+      </div>
+      
+      <div class="table-container">
+        <table class="empleados-table">
             <thead>
               <tr>
                 <th>ID</th>
@@ -47,7 +51,7 @@
                 <th>Estatus</th>
                 <th>Tipo Nómina</th>
                 <th>Planta</th>
-                <th>Editar</th> <!-- Nueva columna para editar -->
+                <th>Editar</th> 
               </tr>
             </thead>
             <tbody id="empleados-body">
@@ -57,7 +61,6 @@
       </section>      
   </div>
 
-  <!-- Modal para editar empleado -->
   <div id="modalEditar" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
@@ -121,7 +124,11 @@
     </div>
   </div>
 
-  <!-- Script para cargar datos y editar -->
+  <!-- Librerías para exportación -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+  
   <script src="../code/ver-empleados.js"></script>
 </body>
 </html>

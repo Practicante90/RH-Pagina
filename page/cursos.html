@@ -8,29 +8,27 @@
 </head>
 <body>
 
-    <div class="sidebar">
-        <h2>Menú</h2>
-        <a href="../page/index.html">Inicio</a>
-        <a href="../page/empleados.html">Empleados</a>
-        <a href="../page/cursos.html">Cursos</a>
-        <a href="../page/capacitadores.html">Capacitadores</a>
-        <a href="../page/programacion-cursos.html">Programación</a>
-        <a href="#">Cerrar Sesión</a>
-      </div>
-
+  <div class="sidebar">
+    <h2>Menú</h2>
+    <a href="index.html">Inicio</a>
+    <a href="empleados.html">Empleados</a>
+    <a href="cursos.html">Cursos</a>
+    <a href="capacitadores.html">Capacitadores</a>
+    <a href="programacion-cursos.html">Programación</a>
+    <a href="empleadosPorCurso.html">Empleados por Curso</a>
+    <a href="calificacion.html">Calificaciones</a>
+  </div>
   <div class="content">
     <header>
       <h1>Agregar Nuevo Curso</h1>
     </header>
 
-    <!-- Notificación de confirmación -->
     <div id="notification" class="notification">
       <span id="notification-message"></span>
       <button id="notification-close">&times;</button>
     </div>
 
     <section>
-      <!-- Contenedor de mensajes -->
       <div id="mensajeCurso" class="mensaje"></div>
 
       <form class="form-curso" id="formCurso">
@@ -43,7 +41,7 @@
           <textarea id="descripcion" name="descripcion" rows="5" required></textarea>
         </div>
         <button type="submit" class="btn-submit">Guardar Curso</button>
-        <a href="../page/ver_cursos.html" class="btn-view">Ver cursos</a>
+        <a href="ver_cursos.html" class="btn-view">Ver cursos</a>
       </form>
     </section>
   </div>

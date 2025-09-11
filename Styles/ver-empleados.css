@@ -1,68 +1,166 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f4f7f8;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 20px;
+    animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    50% { background: linear-gradient(135deg, #764ba2 0%, #667eea 100%); }
 }
 
 .back-button {
     margin-bottom: 20px;
+    animation: slideInLeft 0.8s ease-out;
+}
+
+@keyframes slideInLeft {
+    from { transform: translateX(-50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
 }
 
 .back-button a {
     display: inline-block;
     text-decoration: none;
     color: white;
-    background-color: #1a4bbc;
-    padding: 10px 15px;
-    border-radius: 5px;
-    transition: background 0.3s;
+    background: linear-gradient(135deg, #1a4bbc 0%, #2980b9 100%);
+    padding: 12px 20px;
+    border-radius: 10px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(26, 75, 188, 0.3);
+}
+
+.back-button a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.back-button a:hover::before {
+    left: 100%;
 }
 
 .back-button a:hover {
-    background-color: #1a4bbc;
+    background: linear-gradient(135deg, #2980b9 0%, #1a4bbc 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(26, 75, 188, 0.4);
 }
 
 .content header {
-    background-color: #1a4bbc;
+    background: linear-gradient(135deg, #1a4bbc 0%, #2980b9 100%);
     color: white;
-    padding: 15px;
-    border-radius: 5px;
+    padding: 20px;
+    border-radius: 15px;
     margin-bottom: 20px;
+    box-shadow: 0 8px 25px rgba(26, 75, 188, 0.3);
+    animation: fadeInScale 0.8s ease-out 0.2s both;
+    position: relative;
+    overflow: hidden;
+}
+
+.content header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+@keyframes fadeInScale {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 .empleados-table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
     overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    animation: slideInUp 0.8s ease-out 0.4s both;
+    backdrop-filter: blur(10px);
 }
 
 .empleados-table th, .empleados-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #ddd;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     text-align: left;
-    
+    transition: all 0.3s ease;
 }
 
 .empleados-table th {
-    background-color: #1a4bbc;
+    background: linear-gradient(135deg, #1a4bbc 0%, #2980b9 100%);
     color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.empleados-table tr {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeInRow 0.6s ease-out both;
+}
+
+.empleados-table tr:nth-child(1) { animation-delay: 0.5s; }
+.empleados-table tr:nth-child(2) { animation-delay: 0.6s; }
+.empleados-table tr:nth-child(3) { animation-delay: 0.7s; }
+.empleados-table tr:nth-child(4) { animation-delay: 0.8s; }
+.empleados-table tr:nth-child(5) { animation-delay: 0.9s; }
+
+@keyframes fadeInRow {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }
 
 .empleados-table tr:hover {
-    background-color: #f1f1f1;
+    background: linear-gradient(90deg, rgba(26, 75, 188, 0.05), rgba(41, 128, 185, 0.05));
+    transform: scale(1.01);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-edit {
+    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+}
+
+.btn-edit:hover {
+    background: linear-gradient(135deg, #ff9800 0%, #ffc107 100%);
+    transform: translateY(-2px) scale(1.1);
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
 }
 
 @media (max-width: 768px) {
     .empleados-table th, .empleados-table td {
         font-size: 12px;
-        padding: 8px 10px;
+        padding: 10px 15px;
     }
 
     .back-button a {
-        padding: 8px 12px;
+        padding: 10px 15px;
         font-size: 14px;
     }
 }
@@ -74,42 +172,63 @@ body {
     left: 0; top: 0;
     width: 100%; height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
     transition: all 0.3s ease;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .modal-content {
-    background-color: #fff;
+    background: rgba(255, 255, 255, 0.95);
     margin: 50px auto;
-    padding: 25px 30px;
-    border-radius: 12px;
+    padding: 30px 35px;
+    border-radius: 20px;
     width: 90%;
     max-width: 650px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
+    position: relative;
+    animation: slideInUp 0.5s ease-out;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .modal-content h2 {
     margin-top: 0;
-    color: #3498db;
+    color: #1a4bbc;
     text-align: center;
+    font-size: 24px;
+    font-weight: 600;
 }
 
 .close {
     color: #aaa;
-    font-size: 28px;
+    font-size: 32px;
     font-weight: bold;
     cursor: pointer;
     position: absolute;
-    top: 15px;
-    right: 25px;
-    transition: color 0.2s;
+    top: 20px;
+    right: 30px;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .close:hover {
-    color: #000;
+    color: #1a4bbc;
+    background: rgba(26, 75, 188, 0.1);
+    transform: rotate(90deg);
 }
 
 #formEditarEmpleado {
@@ -120,39 +239,79 @@ body {
 
 #formEditarEmpleado label {
     display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
+    font-weight: 600;
+    margin-bottom: 8px;
     font-size: 14px;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+#formEditarEmpleado:focus-within label {
+    color: #1a4bbc;
 }
 
 #formEditarEmpleado input {
     width: 100%;
-    padding: 8px 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 2px solid #e1e8ed;
     font-size: 14px;
     box-sizing: border-box;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(255, 255, 255, 0.9);
 }
 
-#formEditarEmpleado input[type="hidden"] { display: none; }
+#formEditarEmpleado input:focus {
+    outline: none;
+    border-color: #1a4bbc;
+    box-shadow: 0 0 0 3px rgba(26, 75, 188, 0.1);
+    transform: translateY(-2px);
+    background: white;
+}
+
+#formEditarEmpleado input[type="hidden"] { 
+    display: none; 
+}
+
 #formEditarEmpleado input.full-width {
     grid-column: 1 / -1;
 }
 
 #formEditarEmpleado button {
     grid-column: 1 / -1;
-    padding: 12px 20px;
-    background-color: #1a4bbc;
+    padding: 15px 25px;
+    background: linear-gradient(135deg, #1a4bbc 0%, #2980b9 100%);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(26, 75, 188, 0.3);
+}
+
+#formEditarEmpleado button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+#formEditarEmpleado button:hover::before {
+    left: 100%;
 }
 
 #formEditarEmpleado button:hover {
-    background-color: #1a4bbc;
+    background: linear-gradient(135deg, #2980b9 0%, #1a4bbc 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(26, 75, 188, 0.4);
 }
 
 @media (max-width: 600px) {
@@ -167,26 +326,38 @@ body {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: #4CAF50;
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
     color: white;
-    padding: 15px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 18px 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.3);
     z-index: 1000;
     max-width: 350px;
-    animation: slideIn 0.3s ease-out;
+    animation: slideInRight 0.5s ease-out, bounce 0.6s ease-out 0.5s;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% { transform: translate3d(0,0,0); }
+    40%, 43% { transform: translate3d(0,-8px,0); }
+    70% { transform: translate3d(0,-4px,0); }
+    90% { transform: translate3d(0,-2px,0); }
 }
 
 .notification.error {
-    background: #f44336;
+    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+    box-shadow: 0 8px 25px rgba(244, 67, 54, 0.3);
 }
 
 .notification.warning {
-    background: #ff9800;
+    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+    box-shadow: 0 8px 25px rgba(255, 152, 0, 0.3);
 }
 
 .notification.info {
-    background: #2196F3;
+    background: linear-gradient(135deg, #2196F3 0%, #1976d2 100%);
+    box-shadow: 0 8px 25px rgba(33, 150, 243, 0.3);
 }
 
 .notification #notification-message {
@@ -198,14 +369,22 @@ body {
     background: none;
     border: none;
     color: white;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
     float: right;
     margin-left: 10px;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .notification #notification-close:hover {
-    opacity: 0.8;
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
 }
 
 @keyframes slideIn {
@@ -227,5 +406,90 @@ body {
     to {
         transform: translateX(100%);
         opacity: 0;
+    }
+}
+
+/* Estilos para botones de descarga */
+.download-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    animation: slideInRight 0.8s ease-out 0.6s both;
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.btn-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-download::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-download:hover::before {
+    left: 100%;
+}
+
+.btn-excel {
+    background: linear-gradient(135deg, #217346 0%, #1e6b3d 100%);
+    color: white;
+}
+
+.btn-excel:hover {
+    background: linear-gradient(135deg, #1e6b3d 0%, #217346 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(33, 115, 70, 0.4);
+}
+
+.btn-pdf {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+}
+
+.btn-pdf:hover {
+    background: linear-gradient(135deg, #c82333 0%, #dc3545 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+}
+
+.btn-download i {
+    font-size: 16px;
+}
+
+/* Responsive para botones de descarga */
+@media (max-width: 768px) {
+    .download-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn-download {
+        justify-content: center;
+        padding: 10px 15px;
+        font-size: 13px;
     }
 }

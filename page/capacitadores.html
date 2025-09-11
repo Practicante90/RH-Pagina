@@ -10,12 +10,13 @@
 
   <div class="sidebar">
     <h2>Menú</h2>
-    <a href="../page/index.html">Inicio</a>
-    <a href="../page/empleados.html">Empleados</a>
-    <a href="../page/cursos.html">Cursos</a>
-    <a href="../page/capacitadores.html">Capacitadores</a>
-    <a href="../page/programacion-cursos.html">Programación</a>
-    <a href="#">Cerrar Sesión</a>
+    <a href="index.html">Inicio</a>
+    <a href="empleados.html">Empleados</a>
+    <a href="cursos.html">Cursos</a>
+    <a href="capacitadores.html">Capacitadores</a>
+    <a href="programacion-cursos.html">Programación</a>
+    <a href="empleadosPorCurso.html">Empleados por Curso</a>
+    <a href="calificacion.html">Calificaciones</a>
   </div>
 
   <div class="content">
@@ -23,35 +24,33 @@
       <h1>Agregar Nuevo Capacitador</h1>
     </header>
 
-    <!-- Notificación de confirmación -->
     <div id="notification" class="notification">
       <span id="notification-message"></span>
       <button id="notification-close">&times;</button>
     </div>
 
     <section>
-      <!-- Contenedor de mensajes -->
       <div id="mensajeCapacitador" class="mensaje"></div>
 
       <form class="form-capacitador" id="formCapacitador">
         <div class="form-group">
           <label for="empleado_id">Empleado:</label>
           <input type="text" id="empleado_id" name="empleado_id" list="empleadosList" placeholder="Escribe para buscar..." required>
-          <datalist id="empleadosList">
-            <!-- Opciones se llenarán dinámicamente desde la API -->
-          </datalist>
+          <datalist id="empleadosList"></datalist>
         </div>        
+
         <div class="form-group">
           <label for="fecha_alta">Fecha de Alta:</label>
           <input type="date" id="fecha_alta" name="fecha_alta" required>
         </div>
+        
         <div class="form-group">
           <label for="estatus">Estatus:</label>
           <input type="text" id="estatus" name="estatus" placeholder="Activo/Inactivo" required>
         </div>
 
         <button type="submit" class="btn-submit">Guardar Capacitador</button>
-        <a href="../page/ver-capacitadores.html" class="btn-view">Ver Capacitadores</a>
+        <a href="ver-capacitadores.html" class="btn-view">Ver Capacitadores</a>
       </form>
     </section>
   </div>

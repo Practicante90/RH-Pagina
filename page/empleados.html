@@ -7,24 +7,23 @@
   <link rel="stylesheet" href="../Styles/empleados.css">
 </head>
 <body>
-  <!-- Menú lateral -->
-      <div class="sidebar">
-        <h2>Menú</h2>
-        <a href="../page/index.html">Inicio</a>
-        <a href="../page/empleados.html">Empleados</a>
-        <a href="../page/cursos.html">Cursos</a>
-        <a href="../page/capacitadores.html">Capacitadores</a>
-        <a href="../page/programacion-cursos.html">Programación</a>
-        <a href="#">Cerrar Sesión</a>
-      </div>
-
-  <!-- Contenido principal -->
+  
+  <div class="sidebar">
+    <h2>Menú</h2>
+    <a href="index.html">Inicio</a>
+    <a href="empleados.html">Empleados</a>
+    <a href="cursos.html">Cursos</a>
+    <a href="capacitadores.html">Capacitadores</a>
+    <a href="programacion-cursos.html">Programación</a>
+    <a href="empleadosPorCurso.html">Empleados por Curso</a>
+    <a href="calificacion.html">Calificaciones</a>
+  </div>
+  
   <div class="content">
     <header>
       <h1>Registro de Empleados</h1>
     </header>
 
-    <!-- Notificación de confirmación -->
     <div id="notification" class="notification">
       <span id="notification-message"></span>
       <button id="notification-close">&times;</button>
@@ -32,7 +31,6 @@
 
     <section>
       <form action="#" method="POST" class="form-empleado">
-        <!-- Campos del formulario -->
         <div class="form-group">
           <label for="clave">Clave</label>
           <input type="number" id="clave" name="clave" required>
@@ -118,9 +116,8 @@
           <input type="number" id="planta" name="planta" required>
         </div>
 
-        <!-- Botones -->
         <button type="submit" class="btn-submit">Guardar</button>
-        <a href="../page/ver-empleados.html" class="btn-view">Ver Empleados</a>
+        <a href="ver-empleados.html" class="btn-view">Ver Empleados</a>
       </form>
     </section>
   </div>

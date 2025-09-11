@@ -7,31 +7,38 @@
   <link rel="stylesheet" href="../Styles/ver-programacion-cursos.css">
 </head>
 <body>
-  <!-- Botón regresar -->
+
   <div class="back-button">
-    <a href="../page/programacion-cursos.html">&larr; Regresar</a>
+    <a href="programacion-cursos.html">&larr; Regresar</a>
   </div>
 
-  <!-- Contenido principal -->
   <div class="content">
     <header>
       <h1>Programación de Cursos Registrada</h1>
     </header>
 
-    <!-- Notificación de confirmación -->
     <div id="notification" class="notification">
       <span id="notification-message"></span>
       <button id="notification-close">&times;</button>
     </div>
 
     <section>
+      <div class="download-buttons">
+        <button id="btnExportExcel" class="btn-download btn-excel">
+          <i>📊</i> Exportar a Excel
+        </button>
+        <button id="btnExportPDF" class="btn-download btn-pdf">
+          <i>📄</i> Exportar a PDF
+        </button>
+      </div>
+      
       <div class="table-container">
         <table class="programacion-table">
           <thead>
             <tr>
               <th>ID</th>
               <th>Capacitador</th>
-              <th>Curso</th>
+              <th>Curso</th>  
               <th>Fecha de Inicio</th>
               <th>Duración (horas)</th>
               <th>Estatus</th>
@@ -39,14 +46,12 @@
             </tr>
           </thead>
           <tbody id="programacion-body">
-            <!-- Aquí se insertarán los datos -->
           </tbody>
         </table>
       </div>
     </section>      
   </div>
 
-  <!-- Modal para editar programación -->
   <div id="modalEditar" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
@@ -58,7 +63,6 @@
           <label for="edit_capacitador_input">Capacitador:</label>
           <input type="text" id="edit_capacitador_input" name="edit_capacitador_input" list="editCapacitadoresList" placeholder="Escribe para buscar..." required>
           <datalist id="editCapacitadoresList">
-            <!-- Opciones se llenarán dinámicamente desde la API -->
           </datalist>
           <input type="hidden" id="edit_capacitador_id" name="edit_capacitador_id">
         </div>
@@ -67,10 +71,9 @@
           <label for="edit_curso_input">Curso:</label>
           <input type="text" id="edit_curso_input" name="edit_curso_input" list="editCursosList" placeholder="Escribe para buscar..." required>
           <datalist id="editCursosList">
-            <!-- Opciones se llenarán dinámicamente desde la API -->
           </datalist>
           <input type="hidden" id="edit_curso_id" name="edit_curso_id">
-        </div>
+        </div> 
 
         <div class="form-group">
           <label for="edit_fecha_inicio">Fecha de Inicio:</label>
@@ -97,6 +100,11 @@
     </div>
   </div>
 
+  <!-- Librerías para exportación -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
+  
   <!-- Script para cargar datos -->
   <script src="../code/ver-programacion-cursos.js"></script>
 </body>

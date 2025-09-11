@@ -10,12 +10,13 @@
 
   <div class="sidebar">
     <h2>Menú</h2>
-    <a href="../page/index.html">Inicio</a>
-    <a href="../page/empleados.html">Empleados</a>
-    <a href="../page/cursos.html">Cursos</a>
-    <a href="../page/capacitadores.html">Capacitadores</a>
-    <a href="../page/programacion-cursos.html">Programación</a>
-    <a href="#">Cerrar Sesión</a>
+    <a href="index.html">Inicio</a>
+    <a href="empleados.html">Empleados</a>
+    <a href="cursos.html">Cursos</a>
+    <a href="capacitadores.html">Capacitadores</a>
+    <a href="programacion-cursos.html">Programación</a>
+    <a href="empleadosPorCurso.html">Empleados por Curso</a>
+    <a href="calificacion.html">Calificaciones</a>
   </div>
 
   <div class="content">
@@ -23,7 +24,6 @@
       <h1>Programación de Cursos</h1>
     </header>
 
-    <!-- Notificación de confirmación -->
     <div id="notification" class="notification">
       <span id="notification-message"></span>
       <button id="notification-close">&times;</button>
@@ -35,7 +35,6 @@
           <label for="capacitador_id">Capacitador:</label>
           <input type="text" id="capacitador_input" name="capacitador_input" list="capacitadoresList" placeholder="Escribe para buscar..." required>
           <datalist id="capacitadoresList">
-            <!-- Opciones se llenarán dinámicamente desde la API -->
           </datalist>
           <input type="hidden" id="capacitador_id" name="capacitador_id">
         </div>
@@ -44,7 +43,6 @@
           <label for="curso_id">Curso:</label>
           <input type="text" id="curso_input" name="curso_input" list="cursosList" placeholder="Escribe para buscar..." required>
           <datalist id="cursosList">
-            <!-- Opciones se llenarán dinámicamente desde la API -->
           </datalist>
           <input type="hidden" id="curso_id" name="curso_id">
         </div>
@@ -70,7 +68,7 @@
         </div>
 
         <button type="submit" class="btn-submit">Guardar Programación</button>
-        <a href="../page/ver-programacion-cursos.html" class="btn-view">Ver Programación</a>
+        <a href="ver-programacion-cursos.html" class="btn-view">Ver Programación</a>
       </form>
     </section>
   </div>

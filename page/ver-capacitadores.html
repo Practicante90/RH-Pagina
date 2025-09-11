@@ -7,26 +7,33 @@
   <link rel="stylesheet" href="../Styles/ver-capacitadores.css"> 
 </head>
 <body>
-  <!-- Botón regresar -->
+
   <div class="back-button">
-    <a href="../page/capacitadores.html">&larr; Regresar</a>
+    <a href="capacitadores.html">&larr; Regresar</a>
   </div>
 
-  <!-- Contenido principal -->
   <div class="content">
     <header>
       <h1>Capacitadores Registrados</h1>
     </header>
 
-    <!-- Notificación de confirmación -->
     <div id="notification" class="notification">
       <span id="notification-message"></span>
       <button id="notification-close">&times;</button>
     </div>
 
     <section>
+      <div class="download-buttons">
+        <button id="btnExportExcel" class="btn-download btn-excel">
+          <i>📊</i> Exportar a Excel
+        </button>
+        <button id="btnExportPDF" class="btn-download btn-pdf">
+          <i>📄</i> Exportar a PDF
+        </button>
+      </div>
+      
       <div class="table-container">
-        <table class="empleados-table">
+        <table class="capacitadores-table">
           <thead>
             <tr>
               <th>ID</th>
@@ -39,14 +46,12 @@
             </tr>
           </thead>
           <tbody id="capacitadores-body">
-            <!-- Aquí se insertarán los datos -->
           </tbody>
         </table>
       </div>
     </section>      
   </div>
 
-  <!-- Modal para editar capacitador -->
   <div id="modalEditarCapacitador" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
@@ -74,7 +79,9 @@
     </div>
   </div>
 
-  <!-- Script para cargar datos -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
   <script src="../code/ver-capacitadores.js"></script>
 </body>
 </html>

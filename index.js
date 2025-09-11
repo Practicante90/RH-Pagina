@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-
 const app = express();
 const PORT = 5501;
 const HOST = '0.0.0.0';
@@ -31,7 +30,16 @@ app.get('/status', (req, res) => {
     });
 });
 
+app.get('/:page', (req, res) => {
+    const page = req.params.page;
+    const filePath = path.join(__dirname, 'page', `${page}.html`);
+    res.sendFile(filePath, err => {
+        if (err) res.status(404).send('Página no encontrada');
+    });
+});
+               
 function getLocalIP() {
+    
     const { networkInterfaces } = require('os');
     const nets = networkInterfaces();
     const results = {};
