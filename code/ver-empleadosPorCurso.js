@@ -63,7 +63,8 @@ async function cargarEmpleadosCurso() {
 
         document.querySelectorAll('.btn-edit').forEach(btn => {
             btn.addEventListener('click', () => abrirModal(btn.dataset.id));
-        });
+        }); 
+        
 
     } catch (error) {
         console.error(error);

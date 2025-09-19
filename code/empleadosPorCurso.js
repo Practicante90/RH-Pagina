@@ -59,7 +59,7 @@ async function cargarEmpleados() {
         data.forEach(e => {
             const option = document.createElement("option");
             option.value = `${e.nombres} ${e.apellido_paterno} ${e.apellido_materno}`;
-            option.dataset.id = e.id;
+            option.dataset.id = e.id;   
             datalist.appendChild(option);
         });
     } catch (error) {
