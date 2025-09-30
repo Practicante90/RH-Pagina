@@ -2,100 +2,139 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Empleados por Curso</title>
     <link rel="stylesheet" href="../Styles/ver-empleadosPorCurso.css">
+    <!-- Librería de íconos (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
-    <div class="back-button">
-        <a href="empleadosPorCurso.html">← Volver</a>
+    <!-- Menú lateral -->
+    <div class="sidebar">
+        <h2>Menú</h2>
+        <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+        <a href="ver-empleados.html"><i class="fas fa-users"></i> Empleados</a>
+        <a href="ver_cursos.html"><i class="fas fa-book"></i> Cursos</a>
+        <a href="ver-capacitadores.html"><i class="fas fa-chalkboard-teacher"></i> Instructores</a>
+        <a href="ver-programacion-cursos.html"><i class="fas fa-calendar-alt"></i> Programación</a>
+        <a href="ver-empleadosPorCurso.html"><i class="fas fa-user-graduate"></i> Empleados por Curso</a>
+        <a href="ver-calificaciones.html"><i class="fas fa-star"></i> Calificaciones</a>
     </div>
 
+    <!-- Contenido principal -->
     <div class="content">
         <header>
-            <h2>Registros de Empleados por Curso</h2>
+            <h1>Registros de Empleados por Curso</h1>
         </header>
 
         <div class="download-buttons">
             <button id="btnExportExcel" class="btn-download btn-excel">
-                <i>📊</i> Exportar a Excel
+                <i class="fas fa-file-excel"></i> Exportar a Excel
             </button>
+            <a href="subir-zip.html" class="btn-download btn-zip">
+                <i class="fas fa-file-archive"></i> Subir ZIP
+            </a>
             <button id="btnExportPDF" class="btn-download btn-pdf">
-                <i>📄</i> Exportar a PDF
+                <i class="fas fa-file-pdf"></i> Exportar a PDF
             </button>
         </div>
 
-        <table class="empleados-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Empleado</th>
-                    <th>Curso</th>
-                    <th>Capacitador</th>
-                    <th>Fecha Inicio</th>
-                    <th>Asistencia</th>
-                    <th>Aprobado</th>
-                    <th>Calificación</th>
-                    <th>Observaciones</th>
-                    <th>Certificado Enviado</th>
-                    <th>Estatus</th>
-                    <th>Editar</th>
-                </tr>
-            </thead>
-            <tbody id="empleados-curso-body"></tbody>
-        </table>
-    </div>
-
-    <div id="modalEditarCurso" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Editar Registro</h2>
-
-            <form id="formEditarCurso">
-                <input type="hidden" id="edit_id">
-                
-                <label for="programacion_select">Curso Programado:</label>
-                <select id="programacion_select" required></select>
-
-                <label for="empleado_input">Empleado:</label>
-                <input list="empleadosList" id="empleado_input" required>
-                <datalist id="empleadosList"></datalist>
-                <input type="hidden" id="edit_empleado_id">
-
-                <label>
-                    <input type="checkbox" id="edit_asistencia">
-                    Asistencia
-                </label>
-
-                <label>
-                    <input type="checkbox" id="edit_aprobado">
-                    Aprobado
-                </label>
-
-                <label for="edit_calificacion">Calificación:</label>
-                <input type="number" id="edit_calificacion" step="0.01" min="0" max="100">
-
-                <label for="edit_observaciones">Observaciones:</label>
-                <textarea id="edit_observaciones"></textarea>
-
-                <label>
-                    <input type="checkbox" id="edit_certificado_enviado">
-                    Certificado Enviado
-                </label>
-
-                <label for="edit_estatus">Estatus:</label>
-                <input type="text" id="edit_estatus" required>
-
-                <button type="submit">Guardar Cambios</button>
-            </form>
+        <!-- Botón de Agregar -->
+        <div class="add-button">
+            <a href="empleadosPorCurso.html" class="btn-add">
+                <i class="fas fa-plus"></i>
+            </a>
         </div>
-    </div>
 
-    <div id="notification" class="notification">
-        <span id="notification-message"></span>
-        <button id="notification-close">&times;</button>
+        <div class="table-container">
+            <table class="empleados-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Empleado</th>
+                        <th>Curso</th>
+                        <th>Instructor</th>
+                        <th>Fecha Inicio</th>
+                        <th>Asistencia</th>
+                        <th>Aprobado</th>
+                        <th>Calificación</th>
+                        <th>Observaciones</th>
+                        <th>Certificado Enviado</th>
+                        <th>Estatus</th>
+                        <th>Editar</th>
+                    </tr>
+                </thead>
+                <tbody id="empleados-curso-body"></tbody>
+            </table>
+        </div>
+
+        <div id="modalEditarCurso" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Editar Registro</h2>
+                <form id="formEditarCurso">
+                    <input type="hidden" id="edit_id">
+                    
+                    <div class="form-group">
+                        <label for="programacion_select">Curso Programado:</label>
+                        <select id="programacion_select" required></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="empleado_input">Empleado:</label>
+                        <input list="empleadosList" id="empleado_input" required>
+                        <datalist id="empleadosList"></datalist>
+                        <input type="hidden" id="edit_empleado_id">
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="edit_asistencia">
+                            Asistencia
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="edit_aprobado">
+                            Aprobado
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit_calificacion">Calificación:</label>
+                        <input type="number" id="edit_calificacion" step="0.01" min="0" max="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit_observaciones">Observaciones:</label>
+                        <textarea id="edit_observaciones"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="edit_certificado_enviado">
+                            Certificado Enviado
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="edit_estatus">Estatus:</label>
+                        <input type="text" id="edit_estatus" required>
+                    </div>
+
+                    <button type="submit">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="notification" class="notification">
+            <span id="notification-message"></span>
+            <button id="notification-close">&times;</button>
+        </div>
     </div>
 
     <script src="../code/ver-empleadosPorCurso.js"></script>

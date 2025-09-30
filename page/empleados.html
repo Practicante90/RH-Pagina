@@ -3,23 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulario de Empleados</title>
+  <title>Registro de Empleados</title>
   <link rel="stylesheet" href="../Styles/empleados.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-  
-  <div class="sidebar">
-    <h2>Menú</h2>
-    <a href="index.html">Inicio</a>
-    <a href="empleados.html">Empleados</a>
-    <a href="cursos.html">Cursos</a>
-    <a href="capacitadores.html">Capacitadores</a>
-    <a href="programacion-cursos.html">Programación</a>
-    <a href="empleadosPorCurso.html">Empleados por Curso</a>
-    <a href="calificacion.html">Calificaciones</a>
-    <a href="subir-zip.html">Subir Archivo Comprimido</a>
-  </div>
-  
+  <!-- Contenido principal -->
   <div class="content">
     <header>
       <h1>Registro de Empleados</h1>
@@ -31,7 +20,7 @@
     </div>
 
     <section>
-      <form action="#" method="POST" class="form-empleado">
+      <form action="#" method="POST" class="form-empleado" id="formEmpleado">
         <div class="form-group">
           <label for="clave">Clave</label>
           <input type="number" id="clave" name="clave" required>
@@ -94,7 +83,11 @@
 
         <div class="form-group">
           <label for="turno">Turno</label>
-          <input type="number" id="turno" name="turno" min="1">
+          <select id="turno" name="turno" required>
+            <option value="">-- Seleccionar --</option>
+            <option value="Rotativo">Rotativo</option>
+            <option value="Mixto">Mixto</option>
+          </select>
         </div>
 
         <div class="form-group">

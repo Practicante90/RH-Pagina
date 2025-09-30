@@ -9,14 +9,17 @@ const notification = document.getElementById('notification');
 const notificationMessage = document.getElementById('notification-message');
 const notificationClose = document.getElementById('notification-close');
 
+let empleadosSeleccionados = [];
+let capacitadoresGlobal = [];
+let cursosGlobal = [];
+let empleadosGlobal = [];
+
 function showNotification(message, type = 'success') {
     notificationMessage.textContent = message;
     notification.className = `notification ${type}`;
     notification.style.display = 'block';
 
-    setTimeout(() => {
-        hideNotification();
-    }, 5000);
+    setTimeout(() => hideNotification(), 5000);
 }
 
 function hideNotification() {
@@ -29,60 +32,98 @@ function hideNotification() {
 
 notificationClose.addEventListener('click', hideNotification);
 
-let capacitadoresGlobal = [];
-let cursosGlobal = [];
-
+// Cargar capacitadores
 async function cargarCapacitadores() {
     try {
-        const response = await fetch('http://192.168.0.115:3001/api/capacitadores');
-        const capacitadores = await response.json();
-        capacitadoresGlobal = capacitadores;
-
-        capacitadores.forEach(cap => {
+        const res = await fetch('http://192.168.0.115:3001/api/capacitadores');
+        const data = await res.json();
+        capacitadoresGlobal = data;
+        data.forEach(c => {
             const option = document.createElement('option');
-            option.value = `${cap.clave} - ${cap.nombres} ${cap.apellido_paterno}`;
-            option.dataset.id = cap.id;
+            option.value = `${c.clave} - ${c.nombres} ${c.apellido_paterno}`;
+            option.dataset.id = c.id;
             capacitadoresList.appendChild(option);
         });
-    } catch (error) {
-        console.error('Error al cargar capacitadores:', error);
-        showNotification('Error al cargar la lista de capacitadores', 'error');
+    } catch (err) {
+        showNotification('Error al cargar capacitadores', 'error');
     }
 }
-        
+
+// Cargar cursos
 async function cargarCursos() {
     try {
-        const response = await fetch('http://192.168.0.115:3001/api/cursos');
-        const cursos = await response.json();
-        cursosGlobal = cursos;
-
-        cursos.forEach(curso => {
+        const res = await fetch('http://192.168.0.115:3001/api/cursos');
+        const data = await res.json();
+        cursosGlobal = data;
+        data.forEach(c => {
             const option = document.createElement('option');
-            option.value = curso.nombre;
-            option.dataset.id = curso.id;
+            option.value = c.nombre;
+            option.dataset.id = c.id;
             cursosList.appendChild(option);
         });
-    } catch (error) {
-        console.error('Error al cargar cursos:', error);
-        showNotification('Error al cargar la lista de cursos', 'error');
+    } catch (err) {
+        showNotification('Error al cargar cursos', 'error');
     }
 }
 
-capacitadorInput.addEventListener('input', () => {
-    const match = capacitadoresGlobal.find(cap => {
-        const text = `${cap.clave} - ${cap.nombres} ${cap.apellido_paterno}`;
-        return text === capacitadorInput.value;
-    });
-    hiddenCapacitadorId.value = match ? match.id : '';
+// Cargar empleados
+async function cargarEmpleados() {
+    try {
+        const res = await fetch('http://192.168.0.115:3001/api/empleados');
+        const data = await res.json();
+        empleadosGlobal = data;
+        const datalist = document.getElementById('empleadosList');
+        data.forEach(e => {
+            const option = document.createElement('option');
+            option.value = `${e.nombres} ${e.apellido_paterno} ${e.apellido_materno}`;
+            option.dataset.id = e.id;
+            datalist.appendChild(option);
+        });
+    } catch (err) {
+        showNotification('Error al cargar empleados', 'error');
+    }
+}
+
+// Manejo de selección de empleados
+document.getElementById('empleado_input').addEventListener('change', function () {
+    const input = this.value.trim();
+    if (!input) return;
+
+    const option = Array.from(document.getElementById('empleadosList').options)
+                        .find(opt => opt.value === input);
+    if (!option) return;
+
+    const empleadoId = option.dataset.id;
+    if (empleadosSeleccionados.some(e => e.id === empleadoId)) {
+        this.value = "";
+        return;
+    }
+
+    empleadosSeleccionados.push({ id: empleadoId, nombre: input });
+    mostrarEmpleadosSeleccionados();
+    this.value = "";
 });
 
-cursoInput.addEventListener('input', () => {
-    const match = cursosGlobal.find(curso => {
-        return curso.nombre === cursoInput.value;
+function mostrarEmpleadosSeleccionados() {
+    const contenedor = document.getElementById('empleados-seleccionados');
+    contenedor.innerHTML = '';
+    empleadosSeleccionados.forEach(e => {
+        const div = document.createElement('div');
+        div.className = 'empleado-chip';
+        div.textContent = e.nombre;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = 'x';
+        btn.onclick = () => {
+            empleadosSeleccionados = empleadosSeleccionados.filter(emp => emp.id !== e.id);
+            mostrarEmpleadosSeleccionados();
+        };
+        div.appendChild(btn);
+        contenedor.appendChild(div);
     });
-    hiddenCursoId.value = match ? match.id : '';
-});
+}
 
+// Form submit
 formProgramacion.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -92,55 +133,54 @@ formProgramacion.addEventListener('submit', async (e) => {
     const duracion_horas = parseInt(document.getElementById('duracion_horas').value);
     const status = document.getElementById('status').value;
 
-    if (!capacitador_id) {
-        showNotification('Selecciona un capacitador válido de la lista.', 'error');
+    if (!capacitador_id || !curso_id || empleadosSeleccionados.length === 0) {
+        showNotification('Selecciona un capacitador, curso y al menos un empleado', 'error');
         return;
     }
 
-    if (!curso_id) {
-        showNotification('Selecciona un curso válido de la lista.', 'error');
-        return;
-    }
-
-    if (!fecha_inicio) {
-        showNotification('La fecha de inicio es obligatoria.', 'error');
-        return;
-    }
-
-    if (!duracion_horas || duracion_horas <= 0) {
-        showNotification('La duración debe ser mayor a 0 horas.', 'error');
-        return;
-    }
-
-    try {
-        const response = await fetch('http://192.168.0.115:3001/api/programacionCursos', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                capacitador_id,
-                curso_id,
-                fecha_inicio,
-                duracion_horas,
-                status
-            })
-        });
-
-        if (response.ok) {
-            showNotification('Programación de curso guardada correctamente.');
-            formProgramacion.reset();
-            hiddenCapacitadorId.value = '';
-            hiddenCursoId.value = '';
-        } else {
-            const errorText = await response.text();
-            showNotification('Error al guardar la programación: ' + errorText, 'error');
+    for (let emp of empleadosSeleccionados) {
+        try {
+            const res = await fetch('http://192.168.0.115:3001/api/programacionCursos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    capacitador_id,
+                    curso_id,
+                    fecha_inicio,
+                    duracion_horas,
+                    status,
+                    empleado_id: emp.id
+                })
+            });
+            if (!res.ok) {
+                const errorText = await res.text();
+                showNotification('Error al guardar: ' + errorText, 'error');
+                return;
+            }
+        } catch (err) {
+            showNotification('Error de conexión con la API', 'error');
+            return;
         }
-    } catch (error) {
-        console.error(error);
-        showNotification('Error de conexión con la API', 'error');
     }
+
+    showNotification('Programación guardada correctamente', 'success');
+    formProgramacion.reset();
+    empleadosSeleccionados = [];
+    mostrarEmpleadosSeleccionados();
 });
 
-window.addEventListener('DOMContentLoaded', () => {
-    cargarCapacitadores();
-    cargarCursos();
+// Actualizar hidden inputs
+capacitadorInput.addEventListener('input', () => {
+    const match = capacitadoresGlobal.find(c => `${c.clave} - ${c.nombres} ${c.apellido_paterno}` === capacitadorInput.value);
+    hiddenCapacitadorId.value = match ? match.id : '';
 });
+
+cursoInput.addEventListener('input', () => {
+    const match = cursosGlobal.find(c => c.nombre === cursoInput.value);
+    hiddenCursoId.value = match ? match.id : '';
+});
+
+// Inicialización
+cargarCapacitadores();
+cargarCursos();
+cargarEmpleados();

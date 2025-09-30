@@ -4,17 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Capacitadores Registrados</title>
-  <link rel="stylesheet" href="../Styles/ver-capacitadores.css"> 
+  <link rel="stylesheet" href="../Styles/ver-capacitadores.css">
+  <!-- Librería de íconos (FontAwesome) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-  <div class="back-button">
-    <a href="capacitadores.html">&larr; Regresar</a>
+  <!-- Menú lateral -->
+  <div class="sidebar">
+    <h2>Menú</h2>
+    <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+    <a href="ver-empleados.html"><i class="fas fa-users"></i> Empleados</a>
+    <a href="ver_cursos.html"><i class="fas fa-book"></i> Cursos</a>
+    <a href="ver-capacitadores.html"><i class="fas fa-chalkboard-teacher"></i> Instructores</a>
+    <a href="ver-programacion-cursos.html"><i class="fas fa-calendar-alt"></i> Programación</a>
+    <a href="ver-empleadosPorCurso.html"><i class="fas fa-user-graduate"></i> Empleados por Curso</a>
+    <a href="ver-calificaciones.html"><i class="fas fa-star"></i> Calificaciones</a>
   </div>
 
+  <!-- Contenido principal -->
   <div class="content">
     <header>
-      <h1>Capacitadores Registrados</h1>
+      <h1>Instructores Registrados</h1>
     </header>
 
     <div id="notification" class="notification">
@@ -25,15 +36,20 @@
     <section>
       <div class="download-buttons">
         <button id="btnExportExcel" class="btn-download btn-excel">
-          <i>📊</i> Exportar a Excel
+          <i class="fas fa-file-excel"></i> Exportar a Excel
         </button>
         <button id="btnExportPDF" class="btn-download btn-pdf">
-          <i>📄</i> Exportar a PDF
+          <i class="fas fa-file-pdf"></i> Exportar a PDF
         </button>
+      </div>
+      <div class="add-button">
+        <a href="capacitadores.html" class="btn-add">
+          <i class="fas fa-plus"></i>
+        </a>
       </div>
       
       <div class="table-container">
-        <table class="capacitadores-table">
+        <table class="programacion-table">
           <thead>
             <tr>
               <th>ID</th>
@@ -68,11 +84,20 @@
           </datalist>
         </div>
 
-        <label>Fecha de Alta:</label>
-        <input type="date" id="edit_fecha_alta" required>
+        <div class="form-group">
+          <label for="edit_fecha_alta">Fecha de Alta:</label>
+          <input type="date" id="edit_fecha_alta" required>
+        </div>
 
-        <label>Estatus:</label>
-        <input type="text" id="edit_estatus" required>
+        <div class="form-group">
+          <label for="edit_estatus">Estatus:</label>
+          <select id="edit_estatus" required>
+            <option value="pendiente">Programado</option>
+            <option value="en_proceso">En Proceso</option>
+            <option value="completado">Completado</option>
+            <option value="cancelado">Cancelado</option>
+          </select>
+        </div>
 
         <button type="submit">Guardar Cambios</button>
       </form>

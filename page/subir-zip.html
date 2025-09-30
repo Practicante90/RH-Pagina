@@ -5,35 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Procesar ZIP</title>
     <link rel="stylesheet" href="../Styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-
-    <div class="sidebar">
-        <h2>Menú</h2>
-        <a href="/index.html">Inicio</a>
-        <a href="/empleados.html">Empleados</a>
-        <a href="/cursos.html">Cursos</a>
-        <a href="/capacitadores.html">Capacitadores</a>
-        <a href="/programacion-cursos.html">Programación</a>
-        <a href="/empleadosPorCurso.html">Empleados por Curso</a>
-        <a href="/calificacion.html">Calificaciones</a>
-        <a href="/subir-zip.html">Subir Archivo Comprimido</a>
-    </div>
-
-    <div class="main-content">
-        <div class="container">
+    <!-- Contenido principal -->
+    <div class="content">
+        <header>
             <h1>Procesar ZIP y ver PDFs</h1>
+        </header>
 
+        <div class="container">
             <form id="formUpload">
-                <input type="file" name="zipfile" accept=".zip" required>
-                <button type="submit">Procesar ZIP</button>
+                <div class="form-group">
+                    <label for="zipfile">Seleccionar archivo ZIP:</label>
+                    <input type="file" id="zipfile" name="zipfile" accept=".zip" required>
+                </div>
+                <button type="submit" class="btn-submit"><i class="fas fa-upload"></i> Procesar ZIP</button>
             </form>
 
-            <!-- Vista previa de archivos -->
             <div id="previewSection" style="display:none;">
                 <h2>Vista previa de archivos PDF</h2>
                 <ul id="filePreview"></ul>
-                <button id="btnConfirm">Confirmar y enviar correos</button>
+                <button id="btnConfirm" class="btn-submit"><i class="fas fa-check"></i> Confirmar y enviar correos</button>
             </div>
         </div>
     </div>

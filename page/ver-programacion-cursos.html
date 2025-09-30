@@ -5,11 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Programación de Cursos Registrada</title>
   <link rel="stylesheet" href="../Styles/ver-programacion-cursos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-  <div class="back-button">
-    <a href="programacion-cursos.html">&larr; Regresar</a>
+  <div class="sidebar">
+    <h2>Menú</h2>
+    <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+    <a href="ver-empleados.html"><i class="fas fa-users"></i> Empleados</a>
+    <a href="ver_cursos.html"><i class="fas fa-book"></i> Cursos</a>
+    <a href="ver-capacitadores.html"><i class="fas fa-chalkboard-teacher"></i> Instructores</a>
+    <a href="ver-programacion-cursos.html"><i class="fas fa-calendar-alt"></i> Programación</a>
+    <a href="ver-empleadosPorCurso.html"><i class="fas fa-user-graduate"></i> Empleados por Curso</a>
+    <a href="ver-calificaciones.html"><i class="fas fa-star"></i> Calificaciones</a>
   </div>
 
   <div class="content">
@@ -25,23 +33,29 @@
     <section>
       <div class="download-buttons">
         <button id="btnExportExcel" class="btn-download btn-excel">
-          <i>📊</i> Exportar a Excel
+          <i class="fas fa-file-excel"></i> Exportar a Excel
         </button>
         <button id="btnExportPDF" class="btn-download btn-pdf">
-          <i>📄</i> Exportar a PDF
+          <i class="fas fa-file-pdf"></i> Exportar a PDF
         </button>
       </div>
+      <div class="add-button">
+        <a href="programacion-cursos.html" class="btn-add">
+          <i class="fas fa-plus"></i>
+        </a>
+      </div>
       
-      <div class="table-container">
+      <div class="table-container"> 
         <table class="programacion-table">
           <thead>
             <tr>
               <th>ID</th>
-              <th>Capacitador</th>
+              <th>Instructor</th>
               <th>Curso</th>  
               <th>Fecha de Inicio</th>
               <th>Duración (horas)</th>
               <th>Estatus</th>
+              <th>Empleado(s)</th>
               <th>Editar</th>
             </tr>
           </thead>
@@ -58,21 +72,20 @@
       <h2>Editar Programación</h2>
       <form id="formEditarProgramacion">
         <input type="hidden" id="edit_id">
+        <input type="hidden" id="edit_capacitador_id" name="edit_capacitador_id">
+        <input type="hidden" id="edit_curso_id" name="edit_curso_id">
+        <input type="hidden" id="edit_empleado_id" name="edit_empleado_id">
 
         <div class="form-group">
           <label for="edit_capacitador_input">Capacitador:</label>
           <input type="text" id="edit_capacitador_input" name="edit_capacitador_input" list="editCapacitadoresList" placeholder="Escribe para buscar..." required>
-          <datalist id="editCapacitadoresList">
-          </datalist>
-          <input type="hidden" id="edit_capacitador_id" name="edit_capacitador_id">
+          <datalist id="editCapacitadoresList"></datalist>
         </div>
 
         <div class="form-group">
           <label for="edit_curso_input">Curso:</label>
           <input type="text" id="edit_curso_input" name="edit_curso_input" list="editCursosList" placeholder="Escribe para buscar..." required>
-          <datalist id="editCursosList">
-          </datalist>
-          <input type="hidden" id="edit_curso_id" name="edit_curso_id">
+          <datalist id="editCursosList"></datalist>
         </div> 
 
         <div class="form-group">
@@ -88,24 +101,30 @@
         <div class="form-group">
           <label for="edit_status">Estatus:</label>
           <select id="edit_status" required>
-            <option value="pendiente">Pendiente</option>
+            <option value="pendiente">Programado</option>
             <option value="en_proceso">En Proceso</option>
             <option value="completado">Completado</option>
             <option value="cancelado">Cancelado</option>
           </select>
         </div>
 
+        <div class="form-group">
+          <label for="edit_empleados_input">Empleado(s):</label>
+          <input type="text" id="edit_empleados_input" list="editEmpleadosList" placeholder="Escribe para buscar...">
+          <datalist id="editEmpleadosList"></datalist>
+        </div>
+
+        <div id="edit_empleados_seleccionados" class="empleados-seleccionados"></div>
+
         <button type="submit">Guardar Cambios</button>
       </form>
     </div>
   </div>
 
-  <!-- Librerías para exportación -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
   
-  <!-- Script para cargar datos -->
   <script src="../code/ver-programacion-cursos.js"></script>
 </body>
 </html>

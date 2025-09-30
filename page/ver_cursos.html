@@ -5,13 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Listado de Cursos</title>
   <link rel="stylesheet" href="../Styles/ver-cursos.css">
+  <!-- Librería de íconos (FontAwesome) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-
-  <div class="back-button">
-    <a href="cursos.html">← Regresar</a>
+  <!-- Menú lateral -->
+  <div class="sidebar">
+    <h2>Menú</h2>
+    <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+    <a href="ver-empleados.html"><i class="fas fa-users"></i> Empleados</a>
+    <a href="ver_cursos.html"><i class="fas fa-book"></i> Cursos</a>
+    <a href="ver-capacitadores.html"><i class="fas fa-chalkboard-teacher"></i> Instructores</a>
+    <a href="ver-programacion-cursos.html"><i class="fas fa-calendar-alt"></i> Programación</a>
+    <a href="ver-empleadosPorCurso.html"><i class="fas fa-user-graduate"></i> Empleados por Curso</a>
+    <a href="ver-calificaciones.html"><i class="fas fa-star"></i> Calificaciones</a>
   </div>
 
+  <!-- Contenido principal -->
   <div class="content">
     <header>
       <h1>Listado de Cursos</h1>
@@ -22,27 +32,36 @@
       <button id="notification-close">&times;</button>
     </div>
 
-    <div class="download-buttons">
-      <button id="btnExportExcel" class="btn-download btn-excel">
-        <i>📊</i> Exportar a Excel
-      </button>
-      <button id="btnExportPDF" class="btn-download btn-pdf">
-        <i>📄</i> Exportar a PDF
-      </button>
-    </div>
-    
-    <table class="cursos-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre del Curso</th>
-          <th>Descripción</th>
-          <th>Editar</th>
-        </tr>
-      </thead>
-      <tbody id="tablaCursos">
-      </tbody>
-    </table>
+    <section>
+      <div class="download-buttons">
+        <button id="btnExportExcel" class="btn-download btn-excel">
+          <i class="fas fa-file-excel"></i> Exportar a Excel
+        </button>
+        <button id="btnExportPDF" class="btn-download btn-pdf">
+          <i class="fas fa-file-pdf"></i> Exportar a PDF
+        </button>
+      </div>
+      <div class="add-button">
+        <a href="cursos.html" class="btn-add">
+          <i class="fas fa-plus"></i>
+        </a>
+      </div>
+
+      <div class="table-container">
+        <table class="cursos-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre del Curso</th>
+              <th>Descripción</th>
+              <th>Editar</th>
+            </tr>
+          </thead>
+          <tbody id="tablaCursos">
+          </tbody>
+        </table>
+      </div>
+    </section>
   </div>
 
   <div id="modalEditar" class="modal">

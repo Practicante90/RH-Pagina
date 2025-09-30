@@ -2,52 +2,43 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registro de Calificación por Curso</title>
   <link rel="stylesheet" href="../Styles/calificacion.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-
-  <div class="sidebar">
-    <h2>Menú</h2>
-    <a href="index.html">Inicio</a>
-    <a href="empleados.html">Empleados</a>
-    <a href="cursos.html">Cursos</a>
-    <a href="capacitadores.html">Capacitadores</a>
-    <a href="programacion-cursos.html">Programación</a>
-    <a href="empleadosPorCurso.html">Empleados por Curso</a>
-    <a href="calificacion.html">Calificaciones</a>
-    <a href="subir-zip.html">Subir Archivo Comprimido</a>
-  </div>
-
   <div class="content">
     <header>
       <h1>Registro de Calificación por Curso</h1>
     </header>
 
-    <form id="calificacionForm" class="form-empleado">
+    <div id="notification" class="notification">
+      <span id="notification-message"></span>
+      <button id="notification-close">&times;</button>
+    </div>
+
+    <section>
+      <form id="calificacionForm" class="form-empleado">
         <div class="form-group">
           <label for="programacion">Curso Programado:</label>
           <select id="programacion" name="programacion_id" required></select>
         </div>  
 
-      <div class="form-group">
-        <label for="calificacion">Calificación:</label>
-        <input type="number" step="0.01" id="calificacion" name="calificacion" required>
-      </div>
+        <div class="form-group">
+          <label for="calificacion">Calificación:</label>
+          <input type="number" step="0.01" id="calificacion" name="calificacion" required>
+        </div>
 
-      <div class="form-group" style="grid-column: span 2;">
-        <label for="observaciones">Observaciones:</label>
-        <textarea id="observaciones" name="observaciones" rows="3"></textarea>
-      </div>
+        <div class="form-group" style="grid-column: span 2;">
+          <label for="observaciones">Observaciones:</label>
+          <textarea id="observaciones" name="observaciones" rows="3"></textarea>
+        </div>
 
-      <button type="submit" class="btn-submit">Registrar</button>
-      <a href="ver-calificaciones.html" class="btn-view">Ver Calificaciones</a>
-    </form>
-  </div>
-
-  <div id="notification" class="notification">
-    <span id="notification-message"></span>
-    <button id="notification-close">&times;</button>
+        <button type="submit" class="btn-submit">Registrar</button>
+        <a href="ver-calificaciones.html" class="btn-view">Ver Calificaciones</a>
+      </form>
+    </section>
   </div>
 
   <script src="../code/calificacion.js"></script>

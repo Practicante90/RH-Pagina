@@ -3,26 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agregar Capacitador</title>
+  <title>Agregar Instructor</title>
   <link rel="stylesheet" href="../Styles/capacitadores.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-  <div class="sidebar">
-    <h2>Menú</h2>
-    <a href="index.html">Inicio</a>
-    <a href="empleados.html">Empleados</a>
-    <a href="cursos.html">Cursos</a>
-    <a href="capacitadores.html">Capacitadores</a>
-    <a href="programacion-cursos.html">Programación</a>
-    <a href="empleadosPorCurso.html">Empleados por Curso</a>
-    <a href="calificacion.html">Calificaciones</a>
-    <a href="subir-zip.html">Subir Archivo Comprimido</a>
-  </div>
-
   <div class="content">
     <header>
-      <h1>Agregar Nuevo Capacitador</h1>
+      <h1>Agregar Nuevo Instructor</h1>
     </header>
 
     <div id="notification" class="notification">
@@ -31,27 +20,25 @@
     </div>
 
     <section>
-      <div id="mensajeCapacitador" class="mensaje"></div>
-
-      <form class="form-capacitador" id="formCapacitador">
+      <form class="form-empleado" id="formCapacitador">
         <div class="form-group">
-          <label for="empleado_id">Empleado:</label>
+          <label for="empleado_id">Empleado</label>
           <input type="text" id="empleado_id" name="empleado_id" list="empleadosList" placeholder="Escribe para buscar..." required>
           <datalist id="empleadosList"></datalist>
-        </div>        
+        </div>
 
         <div class="form-group">
-          <label for="fecha_alta">Fecha de Alta:</label>
+          <label for="fecha_alta">Fecha de Alta</label>
           <input type="date" id="fecha_alta" name="fecha_alta" required>
         </div>
-        
+
         <div class="form-group">
-          <label for="estatus">Estatus:</label>
-          <input type="text" id="estatus" name="estatus" placeholder="Activo/Inactivo" required>
+          <label for="estatus">Estatus</label>
+          <input type="text" id="estatus" name="estatus" placeholder="Activo / Inactivo" required>
         </div>
 
-        <button type="submit" class="btn-submit">Guardar Capacitador</button>
-        <a href="ver-capacitadores.html" class="btn-view">Ver Capacitadores</a>
+        <button type="submit" class="btn-submit">Guardar Instructor</button>
+        <a href="ver-capacitadores.html" class="btn-view">Ver Instructores</a>
       </form>
     </section>
   </div>

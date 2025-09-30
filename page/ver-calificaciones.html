@@ -2,73 +2,94 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Calificaciones</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registros de Calificaciones</title>
     <link rel="stylesheet" href="../Styles/ver-calificaciones.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 </head>
 <body>
-    <div class="back-button">
-        <a href="calificacion.html">← Volver</a>
+    <div class="sidebar">
+        <h2>Menú</h2>
+        <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+        <a href="ver-empleados.html"><i class="fas fa-users"></i> Empleados</a>
+        <a href="ver_cursos.html"><i class="fas fa-book"></i> Cursos</a>
+        <a href="ver-capacitadores.html"><i class="fas fa-chalkboard-teacher"></i> Instructores</a>
+        <a href="ver-programacion-cursos.html"><i class="fas fa-calendar-alt"></i> Programación</a>
+        <a href="ver-empleadosPorCurso.html"><i class="fas fa-user-graduate"></i> Empleados por Curso</a>
+        <a href="ver-calificaciones.html"><i class="fas fa-star"></i> Calificaciones</a>
     </div>
 
     <div class="content">
         <header>
-            <h2>Registros de Calificaciones</h2>
+            <h1>Registros de Calificaciones</h1>
         </header>
 
-        <div class="download-buttons">
-            <button id="btnExportExcel" class="btn-download btn-excel">
-                <i>📊</i> Exportar a Excel
-            </button>
-            <button id="btnExportPDF" class="btn-download btn-pdf">
-                <i>📄</i> Exportar a PDF
-            </button>
+        <div id="notification" class="notification">
+            <span id="notification-message"></span>
+            <button id="notification-close">&times;</button>
         </div>
 
-        <table class="calificaciones-table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Curso</th>
-                    <th>Capacitador</th>
-                    <th>Fecha Inicio</th>
-                    <th>Calificación</th>
-                    <th>Observaciones</th>
-                    <th>Editar</th>
-                </tr>
-            </thead>
-            <tbody id="calificaciones-body"></tbody>
-        </table>
-    </div>
+        <section>
+            <div class="download-buttons">
+                <button id="btnExportExcel" class="btn-download btn-excel">
+                    <i class="fas fa-file-excel"></i> Exportar a Excel
+                </button>
+                <button id="btnExportPDF" class="btn-download btn-pdf">
+                    <i class="fas fa-file-pdf"></i> Exportar a PDF
+                </button>
+            </div>
+            <div class="add-button">
+                <a href="calificacion.html" class="btn-add">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </div>
+            <div class="table-container">
+                <table class="calificaciones-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Curso</th>
+                            <th>Capacitador</th>
+                            <th>Fecha Inicio</th>
+                            <th>Calificación</th>
+                            <th>Observaciones</th>
+                            <th>Editar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calificaciones-body"></tbody>
+                </table>
+            </div>
+        </section>
 
-    <div id="modalEditarCalificacion" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Editar Calificación</h2>
+        <div id="modalEditarCalificacion" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Editar Calificación</h2>
+                <form id="formEditarCalificacion">
+                    <input type="hidden" id="edit_id">
 
-            <form id="formEditarCalificacion">
-                <input type="hidden" id="edit_id">
-                
-                <label for="programacion_select">Curso Programado:</label>
-                <select id="programacion_select" required></select>
+                    <div class="form-group">
+                        <label for="programacion_select">Curso Programado:</label>
+                        <select id="programacion_select" required></select>
+                    </div>
 
-                <label for="edit_calificacion">Calificación:</label>
-                <input type="number" id="edit_calificacion" step="0.01" min="0" max="100" required>
+                    <div class="form-group">
+                        <label for="edit_calificacion">Calificación:</label>
+                        <input type="number" id="edit_calificacion" step="0.01" min="0" max="100" required>
+                    </div>
 
-                <label for="edit_observaciones">Observaciones:</label>
-                <textarea id="edit_observaciones"></textarea>
+                    <div class="form-group">
+                        <label for="edit_observaciones">Observaciones:</label>
+                        <textarea id="edit_observaciones"></textarea>
+                    </div>
 
-                <button type="submit">Guardar Cambios</button>
-            </form>
+                    <button type="submit">Guardar Cambios</button>
+                </form>
+            </div>
         </div>
-    </div>
-
-    <div id="notification" class="notification">
-        <span id="notification-message"></span>
-        <button id="notification-close">&times;</button>
     </div>
 
     <script src="../code/ver-calificaciones.js"></script>

@@ -5,21 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Control Profesional de Cursos</title>
   <link rel="stylesheet" href="../Styles/index.css">
+  <!-- Librería de íconos (FontAwesome) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
   <div class="sidebar">
     <h2>Menú</h2>
-    <a href="/index.html">Inicio</a>
-    <a href="/empleados.html">Empleados</a>
-    <a href="/cursos.html">Cursos</a>
-    <a href="capacitadores.html">Capacitadores</a>
-    <a href="programacion-cursos.html">Programación</a>
-    <a href="empleadosPorCurso.html">Empleados por Curso</a>
-    <a href="calificacion.html">Calificaciones</a>
-    <a href="subir-zip">Subir Archivo comprimido</a>
+    <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+    <a href="ver-empleados.html"><i class="fas fa-users"></i> Empleados</a>
+    <a href="ver_cursos.html"><i class="fas fa-book"></i> Cursos</a>
+    <a href="ver-capacitadores.html"><i class="fas fa-chalkboard-teacher"></i> Capacitadores</a>
+    <a href="ver-programacion-cursos.html"><i class="fas fa-calendar-alt"></i> Programación</a>
+    <a href="ver-empleadosPorCurso.html"><i class="fas fa-user-graduate"></i> Empleados por Curso</a>
+    <a href="ver-calificaciones.html"><i class="fas fa-star"></i> Calificaciones</a>
   </div>
-
   <div class="content">
     <header>
       <h1>Control de Cursos</h1>
@@ -30,7 +30,8 @@
       <p>Administra empleados y cursos de manera eficiente. Aquí puedes ver las estadísticas principales y acceder rápidamente a las secciones más importantes.</p>
     </section>
 
-    <div class="stat">
+    <section class="stats">
+      <div class="stat">
         <span class="number" id="empleados-count">0</span>
         <span class="label">Empleados Registrados</span>
       </div>      

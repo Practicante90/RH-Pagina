@@ -5,13 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Empleados Registrados</title>
   <link rel="stylesheet" href="../Styles/ver-empleados.css">
+  <!-- Librería de íconos (FontAwesome) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-  <div class="back-button">
-    <a href="empleados.html">&larr; Regresar</a>
+  <!-- Menú lateral -->
+  <div class="sidebar">
+    <h2>Menú</h2>
+    <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+    <a href="ver-empleados.html"><i class="fas fa-users"></i> Empleados</a>
+    <a href="ver_cursos.html"><i class="fas fa-book"></i> Cursos</a>
+    <a href="ver-capacitadores.html"><i class="fas fa-chalkboard-teacher"></i> Instructores</a>
+    <a href="ver-programacion-cursos.html"><i class="fas fa-calendar-alt"></i> Programación</a>
+    <a href="ver-empleadosPorCurso.html"><i class="fas fa-user-graduate"></i> Empleados por Curso</a>
+    <a href="ver-calificaciones.html"><i class="fas fa-star"></i> Calificaciones</a>
   </div>
 
+  <!-- Contenido principal -->
   <div class="content">
     <header>
       <h1>Empleados Registrados</h1>
@@ -25,8 +36,13 @@
     <section>
       <div class="download-buttons">
         <button id="btnExportExcel" class="btn-download btn-excel">
-          <i>📊</i> Exportar a Excel
+          <i class="fas fa-file-excel"></i> Exportar a Excel
         </button>
+      </div>
+      <div class="add-button">
+        <a href="empleados.html" class="btn-add">
+          <i class="fas fa-plus"></i>
+        </a>
       </div>
       
       <div class="table-container">
@@ -68,63 +84,96 @@
       <form id="formEditarEmpleado">
         <input type="hidden" id="edit_id">
 
-        <label for="edit_clave">Clave</label>
-        <input type="number" id="edit_clave" required>
+        <div class="form-group">
+          <label for="edit_clave">Clave</label>
+          <input type="number" id="edit_clave" required>
+        </div>
 
-        <label for="edit_apellido_paterno">Apellido Paterno</label>
-        <input type="text" id="edit_apellido_paterno" required>
+        <div class="form-group">
+          <label for="edit_apellido_paterno">Apellido Paterno</label>
+          <input type="text" id="edit_apellido_paterno" required>
+        </div>
 
-        <label for="edit_apellido_materno">Apellido Materno</label>
-        <input type="text" id="edit_apellido_materno">
+        <div class="form-group">
+          <label for="edit_apellido_materno">Apellido Materno</label>
+          <input type="text" id="edit_apellido_materno">
+        </div>
 
-        <label for="edit_nombres">Nombres</label>
-        <input type="text" id="edit_nombres" required>
+        <div class="form-group">
+          <label for="edit_nombres">Nombres</label>
+          <input type="text" id="edit_nombres" required>
+        </div>
 
-        <label for="edit_VISA">VISA</label>
-        <input type="text" id="edit_VISA" maxlength="2" required>
+        <div class="form-group">
+          <label for="edit_VISA">VISA</label>
+          <input type="text" id="edit_VISA" maxlength="2" required>
+        </div>
 
-        <label for="edit_puesto">Puesto</label>
-        <input type="text" id="edit_puesto" required>
+        <div class="form-group">
+          <label for="edit_puesto">Puesto</label>
+          <input type="text" id="edit_puesto" required>
+        </div>
 
-        <label for="edit_area">Área</label>
-        <input type="text" id="edit_area" required>
+        <div class="form-group">
+          <label for="edit_area">Área</label>
+          <input type="text" id="edit_area" required>
+        </div>
 
-        <label for="edit_fecha_ingreso">Fecha Ingreso</label>
-        <input type="date" id="edit_fecha_ingreso" required>
+        <div class="form-group">
+          <label for="edit_fecha_ingreso">Fecha Ingreso</label>
+          <input type="date" id="edit_fecha_ingreso" required>
+        </div>
 
-        <label for="edit_escolaridad">Escolaridad</label>
-        <input type="text" id="edit_escolaridad">
+        <div class="form-group">
+          <label for="edit_escolaridad">Escolaridad</label>
+          <input type="text" id="edit_escolaridad">
+        </div>
 
-        <label for="edit_fecha_nacimiento">Fecha Nacimiento</label>
-        <input type="date" id="edit_fecha_nacimiento" required>
+        <div class="form-group">
+          <label for="edit_fecha_nacimiento">Fecha Nacimiento</label>
+          <input type="date" id="edit_fecha_nacimiento" required>
+        </div>
 
-        <label for="edit_curp">CURP</label>
-        <input type="text" id="edit_curp" maxlength="18" required>
+        <div class="form-group">
+          <label for="edit_curp">CURP</label>
+          <input type="text" id="edit_curp" maxlength="18" required>
+        </div>
 
-        <label for="edit_email">Email</label>
-        <input type="email" id="edit_email">
+        <div class="form-group">
+          <label for="edit_email">Email</label>
+          <input type="email" id="edit_email">
+        </div>
 
-        <label for="edit_turno">Turno</label>
-        <input type="number" id="edit_turno">
+        <div class="form-group">
+          <label for="edit_turno">Turno</label>
+          <input type="number" id="edit_turno">
+        </div>
 
-        <label for="edit_fecha_alta">Fecha Alta</label>
-        <input type="date" id="edit_fecha_alta" required>
+        <div class="form-group">
+          <label for="edit_fecha_alta">Fecha Alta</label>
+          <input type="date" id="edit_fecha_alta" required>
+        </div>
 
-        <label for="edit_estatus">Estatus</label>
-        <input type="text" id="edit_estatus" required>
+        <div class="form-group">
+          <label for="edit_estatus">Estatus</label>
+          <input type="text" id="edit_estatus" required>
+        </div>
 
-        <label for="edit_tipo_nomina">Tipo Nómina</label>
-        <input type="text" id="edit_tipo_nomina" required>
+        <div class="form-group">
+          <label for="edit_tipo_nomina">Tipo Nómina</label>
+          <input type="text" id="edit_tipo_nomina" required>
+        </div>
 
-        <label for="edit_planta">Planta</label>
-        <input type="number" id="edit_planta" required>
+        <div class="form-group">
+          <label for="edit_planta">Planta</label>
+          <input type="number" id="edit_planta" required>
+        </div>
 
         <button type="submit">Guardar Cambios</button>
       </form>
     </div>
   </div>
 
-  <!-- Librerías para exportación -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.29/jspdf.plugin.autotable.min.js"></script>
