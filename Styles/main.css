@@ -24,11 +24,43 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
+header {
+    position: relative;
+}
+
 header h1 {
     text-align: center;
     font-size: 30px;
     color: #CAE9FF;
     margin-bottom: 25px;
+}
+
+.btn-back {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #BEE9E8;
+    color: #001F3F;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-back:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+}
+
+.btn-back i {
+    font-size: 16px;
 }
 
 .container {
@@ -135,34 +167,9 @@ ul li:hover {
     background-color: rgba(255, 255, 255, 0.05);
 }
 
-@media (max-width: 768px) {
-    .content {
-        padding: 20px;
-    }
-
-    header h1 {
-        font-size: 24px;
-    }
-
-    .container {
-        padding: 15px;
-    }
-}
-
-@media (max-width: 600px) {
-    .content {
-        padding: 15px;
-    }
-
-    .btn-submit {
-        padding: 10px 15px;
-        font-size: 14px;
-    }
-}
-
 .file-item {
     display: grid;
-    grid-template-columns: 2fr 1fr 2fr 50px; /* Adjusted for better spacing */
+    grid-template-columns: 2fr 1fr 2fr 50px;
     align-items: center;
     gap: 10px;
     padding: 10px;
@@ -205,13 +212,99 @@ ul li:hover {
     font-size: 14px;
 }
 
+/* Toast Notification Styles */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #BEE9E8; /* Matches btn-submit for success */
+    color: #001F3F;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 250px;
+    max-width: 400px;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(-20px);
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast.error {
+    background-color: #dc3545; /* Matches remove-btn for error */
+    color: #fff;
+}
+
+.toast.hidden {
+    display: none;
+}
+
+.toast-close {
+    background: none;
+    border: none;
+    color: #001F3F; /* Matches text color for success */
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.toast.error .toast-close {
+    color: #fff; /* White for error to contrast with red background */
+}
+
+.toast-close:hover {
+    color: #CAE9FF;
+}
+
+@media (max-width: 768px) {
+    .content {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+}
+
 @media (max-width: 600px) {
+    .content {
+        padding: 15px;
+    }
+
+    .btn-back {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .btn-submit {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
     .file-item {
-        grid-template-columns: 1fr; /* Stack vertically on small screens */
+        grid-template-columns: 1fr;
         text-align: left;
     }
 
     .remove-btn {
         margin-top: 10px;
+    }
+
+    .toast {
+        min-width: 200px;
+        max-width: 90%;
+        right: 10px;
     }
 }

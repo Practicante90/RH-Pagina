@@ -70,74 +70,24 @@ header h1 {
     margin-bottom: 25px;
 }
 
-.download-buttons {
+.search-container {
     display: flex;
     justify-content: center;
-    gap: 15px;
     margin-bottom: 25px;
 }
 
-.btn-download {
-    border: none;
-    padding: 12px 20px;
-    font-size: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    color: #001F3F;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    text-decoration: none;
-}
-
-.btn-download i {
-    font-size: 18px;
-}
-
-.btn-excel {
-    background-color: #BEE9E8;
-}
-
-.btn-zip {
-    background-color: #79BEEE; 
-}
-
-.btn-pdf {
-    background-color: #CAE9FF;
-}
-
-.btn-download:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
-}
-
-.add-button {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 5px;
-}
-
-.btn-add {
-    border: none;
+.search-container input {
+    width: 50%;
     padding: 12px;
-    font-size: 16px;
+    border: none;
     border-radius: 8px;
-    cursor: pointer;
-    color: #001F3F;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    background-color: #BEE9E8;
-    text-decoration: none;
+    background-color: rgba(255,255,255,0.1);
+    color: #fff;
+    font-size: 16px;
 }
 
-.btn-add:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+.search-container input::placeholder {
+    color: #ccc;
 }
 
 .table-container {
@@ -174,7 +124,63 @@ header h1 {
     background-color: rgba(255, 255, 255, 0.05);
 }
 
-.btn-edit {
+.empleado-link {
+    color: #CAE9FF;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.empleado-link:hover {
+    color: #BEE9E8;
+}
+
+.detalle-empleado-row td {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.detalle-empleado-container {
+    padding: 10px;
+}
+
+.detalle-empleado-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.detalle-empleado-table td {
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.detalle-empleado-table td strong {
+    color: #BEE9E8;
+}
+
+.detalle-row td {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.detalle-curso-container {
+    padding: 10px;
+}
+
+.detalle-curso-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.detalle-curso-table td {
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.detalle-curso-table td strong {
+    color: #BEE9E8;
+}
+
+.btn-cursos {
     background-color: #BEE9E8;
     color: #001F3F;
     border: none;
@@ -185,115 +191,39 @@ header h1 {
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.btn-edit:hover {
+.btn-cursos:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 999;
-    top: 0;
-    left: 0;
+.sub-row td {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.sub-table {
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
-    overflow: auto;
+    border-collapse: collapse;
 }
 
-.modal-content {
-    background: linear-gradient(135deg, #001F3F 0%, #002B55 100%);
-    padding: 30px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 650px;
-    color: #fff;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
-    animation: fadeInScale 0.4s ease-out;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-@keyframes fadeInScale {
-    from { transform: translate(-50%, -50%) scale(0.9); opacity: 0; }
-    to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-}
-
-.close {
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    color: #CAE9FF;
-    font-size: 26px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.close:hover {
-    color: #BEE9E8;
-    transform: rotate(90deg);
-}
-
-.modal-content h2 {
-    text-align: center;
-    color: #BEE9E8;
-    margin-bottom: 20px;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 6px;
-    color: #BEE9E8;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
+.sub-table th {
+    background-color: rgba(0, 0, 0, 0.8);
     padding: 8px;
-    border: none;
-    border-radius: 6px;
-    outline: none;
-    background-color: rgba(255,255,255,0.1);
-    color: #fff;
+    color: #BEE9E8;
 }
 
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-    color: #ccc;
+.sub-table td {
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
-.form-group input[type="checkbox"] {
-    width: auto;
-    margin-right: 8px;
-}
-
-#formEditarCurso button {
-    background-color: #BEE9E8;
-    color: #001F3F;
-    padding: 10px;
-    width: 100%;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
+.curso-link {
+    color: #CAE9FF;
     cursor: pointer;
-    transition: 0.3s;
+    text-decoration: underline;
 }
 
-#formEditarCurso button:hover {
-    background-color: #CAE9FF;
+.curso-link:hover {
+    color: #BEE9E8;
 }
 
 .notification {
@@ -363,6 +293,12 @@ header h1 {
         font-size: 12px;
         padding: 8px;
     }
+
+    .detalle-empleado-table td,
+    .detalle-curso-table td {
+        font-size: 12px;
+        padding: 6px;
+    }
 }
 
 @media (max-width: 600px) {
@@ -373,5 +309,22 @@ header h1 {
     .content {
         margin-left: 0;
         width: 100%;
+    }
+
+    .detalle-empleado-table,
+    .detalle-curso-table {
+        display: block;
+    }
+
+    .detalle-empleado-table tr,
+    .detalle-curso-table tr {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .detalle-empleado-table td,
+    .detalle-curso-table td {
+        flex: 1 1 100%;
+        display: block;
     }
 }

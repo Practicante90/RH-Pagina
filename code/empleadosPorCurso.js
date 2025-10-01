@@ -33,10 +33,10 @@ async function cargarProgramaciones() {
     try {
         const res = await fetch(apiProgramacion);
         if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
+            throw new Error(`Error HTTP: ${res.status}`);
         }
         const data = await res.json();
-        console.log('Programaciones cargadas:', data); 
+        console.log('Programaciones cargadas:', data);
         programacionesGlobal = data;
 
         const courseMap = {};
@@ -46,7 +46,7 @@ async function cargarProgramaciones() {
                     id: p.id,
                     nombre_capacitador: p.nombre_capacitador,
                     fecha_inicio: p.fecha_inicio,
-                    ids: [p.id] 
+                    ids: [p.id]
                 };
             } else {
                 courseMap[p.nombre_curso].ids.push(p.id);
@@ -57,9 +57,9 @@ async function cargarProgramaciones() {
         Object.keys(courseMap).forEach(nombre_curso => {
             const p = courseMap[nombre_curso];
             const option = document.createElement('option');
-            option.value = nombre_curso; 
-            option.textContent = nombre_curso; 
-            option.dataset.ids = JSON.stringify(p.ids); 
+            option.value = nombre_curso;
+            option.textContent = nombre_curso;
+            option.dataset.ids = JSON.stringify(p.ids);
             selectProgramacion.appendChild(option);
         });
     } catch (error) {
@@ -73,19 +73,22 @@ async function cargarEmpleadosCurso(nombreCurso) {
         console.log('Cargando datos para nombre_curso:', nombreCurso);
         const selectedOption = selectProgramacion.selectedOptions[0];
         const programacionIds = JSON.parse(selectedOption.dataset.ids || '[]');
-        console.log('Programacion IDs:', programacionIds); 
+        console.log('Programacion IDs:', programacionIds);
 
         const res = await fetch(apiProgramacion);
         if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
+            throw new Error(`Error HTTP: ${res.status}`);
         }
         const allCursos = await res.json();
         const cursos = allCursos.filter(c => programacionIds.includes(c.id));
-        console.log('Datos de cursos filtrados:', cursos); 
+        console.log('Datos de cursos filtrados:', cursos);
 
         const empleadosCursoRes = await fetch(apiEmpleadosCurso);
+        if (!empleadosCursoRes.ok) {
+            throw new Error(`Error HTTP: ${empleadosCursoRes.status}`);
+        }
         const empleadosCursoData = await empleadosCursoRes.json();
-        console.log('Datos de empleadosPorCurso:', empleadosCursoData); 
+        console.log('Datos de empleadosPorCurso:', empleadosCursoData);
 
         tbody.innerHTML = '';
 
@@ -102,26 +105,26 @@ async function cargarEmpleadosCurso(nombreCurso) {
             const programacionId = curso.id;
 
             const existingRecord = empleadosCursoData.find(reg => reg.programacion_id === programacionId) || {};
-            const recordId = existingRecord.id || Date.now() + Math.floor(Math.random() * 1000); 
+            const recordId = existingRecord.id || null;
 
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td>${nombreCapacitador}</td>
                 <td>${empleadoAsignado}</td>
                 <td>${fechaInicio}</td>
-                <td><input type="checkbox" name="asistencia_${recordId}" ${existingRecord.asistencia ? 'checked' : ''}></td>
-                <td><input type="checkbox" name="aprobado_${recordId}" ${existingRecord.aprobado ? 'checked' : ''}></td>
-                <td><input type="number" name="calificacion_${recordId}" step="0.01" min="0" max="100" value="${existingRecord.calificacion || ''}"></td>
-                <td><textarea name="observaciones_${recordId}">${existingRecord.observaciones || ''}</textarea></td>
-                <td><input type="checkbox" name="certificado_enviado_${recordId}" ${existingRecord.certificado_enviado ? 'checked' : ''}></td>
+                <td><input type="checkbox" name="asistencia_${recordId || programacionId}" ${existingRecord.asistencia ? 'checked' : ''}></td>
+                <td><input type="checkbox" name="aprobado_${recordId || programacionId}" ${existingRecord.aprobado ? 'checked' : ''}></td>
+                <td><input type="number" name="calificacion_${recordId || programacionId}" step="0.01" min="0" max="100" value="${existingRecord.calificacion || ''}"></td>
+                <td><textarea name="observaciones_${recordId || programacionId}">${existingRecord.observaciones || ''}</textarea></td>
+                <td><input type="checkbox" name="certificado_enviado_${recordId || programacionId}" ${existingRecord.certificado_enviado ? 'checked' : ''}></td>
                 <td>
-                    <select name="estatus_${recordId}">
+                    <select name="estatus_${recordId || programacionId}">
                         <option value="pendiente" ${existingRecord.estatus === 'pendiente' ? 'selected' : ''}>Pendiente</option>
                         <option value="impartido" ${existingRecord.estatus === 'impartido' ? 'selected' : ''}>Impartido</option>
                     </select>
                 </td>
-                <input type="hidden" name="id_${recordId}" value="${recordId}">
-                <input type="hidden" name="programacion_id_${recordId}" value="${programacionId}">
+                <input type="hidden" name="id_${recordId || programacionId}" value="${recordId || ''}">
+                <input type="hidden" name="programacion_id_${recordId || programacionId}" value="${programacionId}">
             `;
             tbody.appendChild(tr);
         });
@@ -134,7 +137,7 @@ async function cargarEmpleadosCurso(nombreCurso) {
 
 selectProgramacion.addEventListener('change', () => {
     const nombreCurso = selectProgramacion.value;
-    console.log('Curso seleccionado, nombre_curso:', nombreCurso); 
+    console.log('Curso seleccionado, nombre_curso:', nombreCurso);
     if (nombreCurso) {
         cargarEmpleadosCurso(nombreCurso);
     } else {
@@ -146,33 +149,75 @@ selectProgramacion.addEventListener('change', () => {
 formCapacitador.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(formCapacitador);
-    const updates = [];
+    const updates = {};
 
+    // Registrar todos los datos del formulario para depuración
+    console.log('Datos del formulario:');
     formData.forEach((value, key) => {
-        const [field, id] = key.split('_');
-        if (!updates[id]) {
-            updates[id] = { 
-                id: parseInt(formData.get(`id_${id}`)),
-                programacion_id: parseInt(formData.get(`programacion_id_${id}`))
+        console.log(`Clave: ${key}, Valor: ${value}`);
+    });
+
+    // Inicializar updates con valores por defecto para checkboxes
+    const rows = tbody.querySelectorAll('tr');
+    console.log('Número de filas en la tabla:', rows.length);
+    rows.forEach((row, index) => {
+        const uniqueIdInput = row.querySelector(`input[name^="id_"]`);
+        if (uniqueIdInput) {
+            const id = uniqueIdInput.name.split('_')[1];
+            console.log(`Fila ${index}: id=${id}, programacion_id=${formData.get(`programacion_id_${id}`)}`);
+            updates[id] = {
+                id: parseInt(formData.get(`id_${id}`)) || null,
+                programacion_id: parseInt(formData.get(`programacion_id_${id}`)) || null,
+                asistencia: false,
+                aprobado: false,
+                certificado_enviado: false // Valor por defecto
             };
-        }
-        if (field === 'asistencia' || field === 'aprobado' || field === 'certificado') {
-            updates[id][field] = value === 'on';
-        } else if (field === 'calificacion') {
-            updates[id][field] = value ? parseFloat(value) : null;
-        } else if (field === 'observaciones' || field === 'estatus') {
-            updates[id][field] = value;
+            // Verificar explícitamente el checkbox de certificado_enviado
+            const certificadoValue = formData.get(`certificado_enviado_${id}`);
+            updates[id].certificado_enviado = certificadoValue === 'on';
+            console.log(`Certificado enviado para id=${id}: ${updates[id].certificado_enviado}`);
+        } else {
+            console.warn(`Fila ${index}: No se encontró input con name^="id_"`);
         }
     });
 
+    // Procesar datos del formulario
+    formData.forEach((value, key) => {
+        const [field, id] = key.split('_');
+        if (updates[id] && field !== 'certificado_enviado') { // Evitar procesar certificado_enviado aquí
+            if (field === 'asistencia' || field === 'aprobado') {
+                updates[id][field] = value === 'on';
+            } else if (field === 'calificacion') {
+                updates[id][field] = value ? parseFloat(value) : null;
+            } else if (field === 'observaciones' || field === 'estatus') {
+                updates[id][field] = value;
+            }
+        } else if (!updates[id]) {
+            console.warn(`Campo ignorado: ${key}, no se encontró ID en updates`);
+        }
+    });
+
+    console.log('Objeto updates:', updates);
+    const validUpdates = Object.values(updates).filter(update => update.programacion_id);
+    console.log('Valid updates:', validUpdates);
+
+    if (validUpdates.length === 0) {
+        showNotification('No hay datos para guardar', 'info');
+        return;
+    }
+
     try {
-        for (const update of updates.filter(Boolean)) {
-            console.log('Enviando actualización:', update); 
-            const isNewRecord = update.id >= 1_000_000_000; 
+        for (const update of validUpdates) {
+            console.log('Enviando actualización:', update);
+            const isNewRecord = !update.id;
             const method = isNewRecord ? 'POST' : 'PUT';
             const url = isNewRecord ? apiEmpleadosCurso : `${apiEmpleadosCurso}/${update.id}`;
             const body = { ...update };
-            if (isNewRecord) delete body.id; 
+            if (isNewRecord) delete body.id;
+
+            console.log('URL:', url);
+            console.log('Método:', method);
+            console.log('Cuerpo:', JSON.stringify(body));
 
             const res = await fetch(url, {
                 method,
@@ -180,17 +225,19 @@ formCapacitador.addEventListener('submit', async (e) => {
                 body: JSON.stringify(body)
             });
 
+            const responseText = await res.text();
+            console.log('Estado de respuesta:', res.status);
+            console.log('Texto de respuesta:', responseText);
+
             if (!res.ok) {
-                const text = await res.text();
-                showNotification(`Error al ${isNewRecord ? 'crear' : 'actualizar'} registro ${update.id}: ${text}`, 'error');
-                return;
+                throw new Error(`Error al ${isNewRecord ? 'crear' : 'actualizar'} registro ${update.id || 'nuevo'}: ${responseText}`);
             }
         }
         showNotification('Registros guardados correctamente');
         cargarEmpleadosCurso(selectProgramacion.value);
     } catch (error) {
         console.error('Error al guardar registros:', error);
-        showNotification('Error de conexión', 'error');
+        showNotification(error.message, 'error');
     }
 });
 

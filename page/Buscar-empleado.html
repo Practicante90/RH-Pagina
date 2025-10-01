@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar Empleado y Cursos</title>
+    <link rel="stylesheet" href="../Styles/buscar-empleado-cursos.css">
+    <!-- Librería de íconos (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Menú lateral -->
+    <div class="sidebar">
+        <h2>Menú</h2>
+        <a href="index.html"><i class="fas fa-home"></i> Inicio</a>
+        <a href="ver-empleados.html"><i class="fas fa-users"></i> Empleados</a>
+        <a href="ver_cursos.html"><i class="fas fa-book"></i> Cursos</a>
+        <a href="ver-capacitadores.html"><i class="fas fa-chalkboard-teacher"></i> Instructores</a>
+        <a href="ver-programacion-cursos.html"><i class="fas fa-calendar-alt"></i> Programación</a>
+        <a href="ver-empleadosPorCurso.html"><i class="fas fa-user-graduate"></i> Empleados por Curso</a>
+        <a href="ver-calificaciones.html"><i class="fas fa-star"></i> Calificaciones</a>
+        <a href="Buscar-empleado.html"><i class="fas fa-search"></i> Buscar Empleado</a>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="content">
+        <header>
+            <h1>Buscar Empleado y Cursos</h1>
+        </header>
+
+        <!-- Buscador -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Buscar por nombre o VISA...">
+        </div>
+
+        <div class="table-container" id="table-container" style="display: none;">
+            <table class="empleados-table">
+                <thead>
+                    <tr>
+                        <th>Nombre Completo</th>
+                    </tr>
+                </thead>
+                <tbody id="empleados-body"></tbody>
+            </table>
+        </div>
+
+        <div id="notification" class="notification">
+            <span id="notification-message"></span>
+            <button id="notification-close">&times;</button>
+        </div>
+    </div>
+
+    <script src="../code/buscar-empleado-cursos.js"></script>
+</body>
+</html>

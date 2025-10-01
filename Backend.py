@@ -109,10 +109,9 @@ def extraer_nombre_curso(carpeta, archivo):
         except Exception as e:
             print(f"⚠️ No se pudo leer el PDF {archivo} para extraer curso: {e}")
             return "Curso Desconocido"
-    # Buscar patrón "por haber aprobado el curso: Nombre del curso"
     match = re.search(r'por haber aprobado el curso[:\s]*(.+?)(?:\n|$)', texto, re.IGNORECASE)
     if match:
-        return match.group(1).strip()  # Capture full course name without limit
+        return match.group(1).strip()  
     return "Curso Desconocido"
 
 def buscar_correo_por_curp(curp):
@@ -173,7 +172,7 @@ def serve_css(filename):
     if not os.path.exists(path):
         abort(404)
     return send_from_directory('Styles', filename)
-
+ 
 @app.route('/code/<path:filename>')
 def serve_js(filename):
     path = os.path.join('code', filename)

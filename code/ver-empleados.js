@@ -125,7 +125,7 @@ async function abrirModal(id) {
 
 spanClose.onclick = () => modal.style.display = 'none';
 window.onclick = e => { if (e.target == modal) modal.style.display = 'none'; };
-
+ 
 formEditar.addEventListener('submit', async (e) => {
   e.preventDefault();
   const id = document.getElementById('edit_id').value;
